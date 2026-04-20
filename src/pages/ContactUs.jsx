@@ -62,12 +62,10 @@ function AboutUs() {
         <div className="  md:p-10 ">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126338.55381826295!2d113.99526224335939!3d-8.294856799999991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6ad254d55c68d%3A0x4f33633a94deae4b!2sIvori%20Shoes!5e0!3m2!1sen!2sid!4v1776062168137!5m2!1sen!2sid"
-            width="460"
-            height="450"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            className=" rounded-3xl shadow-xl shadow-blue-900/5"
+            className=" rounded-3xl shadow-xl shadow-blue-900/5 w-full h-[450px] aspect-auto"
           ></iframe>
         </div>
       </div>

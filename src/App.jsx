@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./component/Navbar";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
-import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 import Search from "./pages/Search";
 import Likes from "./pages/Likes";
 
@@ -14,9 +15,10 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/likes" element={<Likes />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

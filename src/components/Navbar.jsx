@@ -18,8 +18,12 @@ export default function Navbar() {
       <div className="container mx-auto flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-6">
-            <div className="text-2xl font-bold">Footverse</div>
-            <ul className="flex flex-wrap items-center gap-6 text-sm font-medium">
+            <div className="">
+              <p className="text-black text-2xl font-bold font-sans ">
+                Footverse
+              </p>
+            </div>
+            <ul className="flex flex-wrap items-center gap-6 text-sm font-medium font-sans">
               <li>
                 <Link
                   to="/"
@@ -38,10 +42,10 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
-                  to="/about"
+                  to="/contact"
                   className="text-slate-700 transition hover:text-blue-600"
                 >
-                  About Us
+                  Contact Us
                 </Link>
               </li>
             </ul>

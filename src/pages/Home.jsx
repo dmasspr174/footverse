@@ -4,13 +4,19 @@ import heroImage from "../assets/1.jpg";
 import shoeCareImage from "../assets/4.jpg";
 import img2 from "../assets/3.jpg";
 import { Link } from "react-router-dom";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Memanggil getImages lalu menyimpan array hits yang dikembalikan ke products state
-    getImages("shoes", 8).then((data) => {
+    getImages("shoes", 12).then((data) => {
       setProducts(data);
     });
   }, []);
@@ -61,46 +67,58 @@ function Home() {
             to="/product"
             className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 transition-colors"
           >
-            Show more <span className="text-lg leading-none">&rarr;</span>
+            Show more <span className="text-md leading-none">&rarr;</span>
           </Link>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full"
-            >
-              <div className="relative w-full overflow-hidden bg-gray-100">
-                <div className="aspect-[3/4] overflow-hidden">
-                  <img
-                    // API Pixabay menyimpan link gambar di webformatURL atau largeImageURL
-                    src={product.webformatURL}
-                    alt={product.tags}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
+        <Carousel
+          opts={{
+            align: "start",
+            loop: false,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="mb-4">
+            {products.map((product) => (
+              <CarouselItem
+                key={product.id}
+                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+              >
+                <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full">
+                  <div className="relative w-full overflow-hidden bg-gray-100">
+                    <div className="aspect-[3/4] overflow-hidden">
+                      <img
+                        src={product.webformatURL}
+                        alt={product.tags}
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-800 mb-6 line-clamp-2 capitalize">
+                        {product.tags}
+                      </h3>
+                    </div>
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-2xl font-bold text-blue-500">
+                        ${product.likes}
+                      </span>
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 whitespace-nowrap">
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="p-6 flex flex-col justify-between flex-1">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-6 line-clamp-2 capitalize">
-                    {/* API Pixabay tidak punya title, tapi punya 'tags' */}
-                    {product.tags}
-                  </h3>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-2xl font-bold text-blue-500">
-                    {/* Karena getImages (Pixabay) tidak punya price, kita buat harga unik berdasarkan likes atau sekadar rata-rata */}
-                    ${product.likes}
-                  </span>
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 whitespace-nowrap">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="hidden md:block">
+            <CarouselPrevious className="-left-12" />
+            <CarouselNext className="-right-12" />
+          </div>
+          {/* Mobile controls inside if needed, or just touch scroll */}
+        </Carousel>
       </div>
       {/* Shoes Care Section */}
       <h1 className="text-center mt-6 text-3xl font-bold text-gray-800 tracking-wider">
@@ -119,7 +137,7 @@ function Home() {
           <h2 className="text-3xl sm:text-4xl md:text-[2.5rem] font-bold text-[#1c1c1c] tracking-tight leading-tight mb-4">
             Caring for Your Shoes the Right Way
           </h2>
-          <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-8">
+          <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-4">
             It’s not just about the buy—it's about the care. Master everything
             from brushing techniques to storage hacks, and keep your kicks
             looking like they just came out of the box.

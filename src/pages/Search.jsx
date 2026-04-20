@@ -20,7 +20,6 @@ function Search() {
       <h1 className="text-3xl font-bold mb-8">Search Results for "{query}"</h1>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => {
-          // Generate mock price based on ID for visual consistency as in Product.jsx
           const price = (product.id % 200) + 50;
           return (
             <div
