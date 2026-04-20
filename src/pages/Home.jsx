@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getImages } from "../api";
-import heroImage from "../assets/imani-bahati-LxVxPA1LOVM-unsplash-removebg-preview.png";
-import shoeCareImage from "../assets/pexels-dania-ortega-40039532-7462589.jpg";
-import img2 from "../assets/pexels-ahnaf-tahmid-2160060276-36478231.jpg";
+import heroImage from "../assets/1.jpg";
+import shoeCareImage from "../assets/4.jpg";
+import img2 from "../assets/3.jpg";
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -10,7 +10,7 @@ function Home() {
 
   useEffect(() => {
     // Memanggil getImages lalu menyimpan array hits yang dikembalikan ke products state
-    getImages("shoes", 4).then((data) => {
+    getImages("shoes", 8).then((data) => {
       setProducts(data);
     });
   }, []);
@@ -30,7 +30,7 @@ function Home() {
             <p className="mt-6 md:mt-8 text-gray-600 text-base sm:text-lg md:text-xl max-w-sm sm:max-w-md leading-relaxed px-2 md:px-0">
               Discover comfort, performance, and design in every step you take.
             </p>
-            <button className="mt-8 md:mt-10 bg-[#1c1c1c] text-white px-8 py-3.5 rounded-full flex items-center gap-2 hover:bg-black transition-colors font-medium w-fit">
+            <button className="mt-8 md:mt-10 bg-[#1c1c1c] text-white px-8 py-3.5 rounded-full flex items-center gap-2 transition-colors font-medium w-fit">
               <Link to="/product">
                 Shop Now <span className="text-xl leading-none">&rarr;</span>
               </Link>
@@ -38,16 +38,12 @@ function Home() {
           </div>
 
           {/* Right Content */}
-          <div className="w-full md:w-1/2 relative flex justify-center items-center z-0 px-4 md:px-0">
-            {/* Pale blue circle background */}
-            <div className="absolute bg-[#e8f1fd]  rounded-full aspect-square w-[65vw] max-w-[300px] sm:w-[200px] md:max-w-none md:w-[270px] md:ms-10 lg:w-[300px] lg:ms-10 xl:w-[350px] xl:ms-10 -z-10 shadow-inner"></div>
-
+          <div className="mt-4 w-full md:w-1/2 relative flex justify-center items-center z-0 px-4 md:px-0">
             {/* Shoe image */}
             <img
               src={heroImage}
               alt="Crazy Shoes"
-              className="relative w-full max-w-[450px] sm:max-w-[550px] md:max-w-none md:w-[140%] lg:w-[160%] xl:w-[180%] object-contain md:-mr-16 drop-shadow-2xl hover:scale-105 transition-transform duration-500 ease-out"
-              style={{ filter: "drop-shadow(0px 20px 30px rgba(0,0,0,0.25))" }}
+              className=" h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
             />
           </div>
         </div>
@@ -93,11 +89,11 @@ function Home() {
                   </h3>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-2xl font-bold text-blue-600">
+                  <span className="text-2xl font-bold text-blue-500">
                     {/* Karena getImages (Pixabay) tidak punya price, kita buat harga unik berdasarkan likes atau sekadar rata-rata */}
                     ${product.likes}
                   </span>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 whitespace-nowrap">
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 whitespace-nowrap">
                     Add to Cart
                   </button>
                 </div>
@@ -107,15 +103,15 @@ function Home() {
         </div>
       </div>
       {/* Shoes Care Section */}
-      <h1 className="text-center mt-12 mb-4 text-3xl font-bold text-gray-800 tracking-wider">
+      <h1 className="text-center mt-6 text-3xl font-bold text-gray-800 tracking-wider">
         SHOE CARE
       </h1>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-12 flex flex-col md:flex-row items-center justify-center md:gap-8 lg:gap-16">
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end mb-8 md:mb-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-12 flex flex-col md:flex-row items-center md:gap-8 lg:gap-16">
+        <div className="w-full md:w-1/2 flex justify-center md:justify-center mb-8 md:mb-0">
           <img
             src={shoeCareImage}
             alt="Shoe Care"
-            className="w-full h-full aspect-square rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
+            className="h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
           />
         </div>
 
@@ -129,7 +125,7 @@ function Home() {
             looking like they just came out of the box.
           </p>
 
-          <h3 className="font-bold text-gray-900 text-lg sm:text-xl mb-4">
+          <h3 className="font-bold text-gray-900 text-lg sm:text-xl mb-2">
             Essential Care Tips:
           </h3>
 
@@ -163,18 +159,69 @@ function Home() {
         </div>
       </div>
       {/**/}
-      <div className="relative lg:mx-16 px-4 ">
+      <div className="relative mx-auto lg:mx-16 px-4 ">
         <div>
           <img
             src={img2}
             alt=""
-            className="w-full h-full aspect-square rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
+            className="w-full mt-6 h-[600px] aspect-auto rounded-2xl shadow-lg hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
           />
         </div>
-        <div className="mt-6 relative flex flex-row">
-          <div className="">card1</div>
-          <div className="">card2</div>
-          <div className="">card3</div>
+        <div className="my-12 w-full grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="relative flex flex-col px-4 text-center rounded-2xl items-center justify-center w-full max-w-[400px] mx-auto h-[200px] border-2 border-gray-100 shadow-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-6"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <h1 className="text-2xl font-bold">The Durability</h1>
+            <p className="text-gray-800 text-base mb-8 sm:text-lg leading-relaxed text-center">
+              Built to handle maximum weight without losing shape
+            </p>
+          </div>
+          <div className="relative flex flex-col px-4 text-center rounded-2xl items-center justify-center w-full max-w-[400px] mx-auto h-[200px]  border-2 border-gray-100 shadow-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-6"
+            >
+              <path
+                fillRule="evenodd"
+                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <h1 className="text-2xl font-bold">The Speed</h1>
+            <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8">
+              Express shipping if you order today, you will wear them sooner.
+            </p>
+          </div>
+          <div className="relative flex flex-col px-4 text-center rounded-2xl items-center justify-center w-full max-w-[400px] mx-auto h-[200px] border-2 border-gray-100 shadow-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-6"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <h1 className="text-2xl font-bold">The Guarantee</h1>
+            <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8">
+              100% satisfaction guarantee or your money back.
+            </p>
+          </div>
         </div>
       </div>
     </div>

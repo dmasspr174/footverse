@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white text-slate-900 px-4 py-3 shadow-sm">
+    <nav className="bg-white text-slate-900 px-4 py-3 shadow-sm border-b border-slate-100">
       <div className="container mx-auto flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-6">

@@ -31,7 +31,7 @@ export const getProducts = async (query = "shoes") => {
   }
 };
 
-export const getImages = async (query = "shoes", limit = 3) => {
+export const getImages = async (query = "shoes", limit = 4) => {
   try {
     if (!API_KEY || !BASE_URL) {
       throw new Error("ENV tidak terbaca");
