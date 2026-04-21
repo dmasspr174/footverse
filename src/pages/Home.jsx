@@ -24,7 +24,7 @@ function Home() {
   return (
     <div className="bg-white font-sans overflow-hidden">
       {/* Hero Section */}
-      <div className="relative min-h-[100svh] md:min-h-[90vh] flex items-center pt-20 pb-16 md:py-0">
+      <div className="relative min-h-[50svh] md:min-h-[90vh] flex items-center lg:pt-20 pb-16 md:py-0">
         <div className="container mx-auto px-4  md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between gap-6md:gap-0">
           {/* Left Content */}
           <div className="w-full md:w-1/2 z-10 flex flex-col items-center text-center md:items-start md:text-left pt-12 md:pt-0">
@@ -49,7 +49,7 @@ function Home() {
             <img
               src={heroImage}
               alt="Crazy Shoes"
-              className=" h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
+              className="h-full md:h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
             />
           </div>
         </div>
@@ -84,9 +84,9 @@ function Home() {
                 key={product.id}
                 className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
-                <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full">
+                <div className="bg-white rounded-lg shadow-md transition-shadow duration-300 overflow-hidden flex flex-col h-full">
                   <div className="relative w-full overflow-hidden bg-gray-100">
-                    <div className="aspect-[3/4] overflow-hidden">
+                    <div className="aspect-[4/3]">
                       <img
                         src={product.webformatURL}
                         alt={product.tags}
@@ -94,13 +94,13 @@ function Home() {
                       />
                     </div>
                   </div>
-                  <div className="p-6 flex flex-col justify-between flex-1">
+                  <div className="flex flex-col justify-between p-4 flex-grow">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-800 mb-6 line-clamp-2 capitalize">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-4 line-clamp-2 capitalize">
                         {product.tags}
                       </h3>
                     </div>
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center justify-between gap-4 mt-auto">
                       <span className="text-2xl font-bold text-blue-500">
                         ${product.likes}
                       </span>
@@ -129,7 +129,7 @@ function Home() {
           <img
             src={shoeCareImage}
             alt="Shoe Care"
-            className="h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
+            className="h-full lg:h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
           />
         </div>
 
@@ -182,7 +182,7 @@ function Home() {
           <img
             src={img2}
             alt=""
-            className="w-full mt-6 h-[600px] aspect-auto rounded-2xl shadow-lg hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
+            className="w-full mt-6 lg:h-[600px] aspect-auto rounded-2xl shadow-lg hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
           />
         </div>
         <div className="my-12 w-full grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
