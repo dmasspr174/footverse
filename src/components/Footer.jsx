@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Youtube, Instagram, Twitter, MessageCircle } from "lucide-react";
+import {
+  Facebook,
+  Youtube,
+  Instagram,
+  Twitter,
+  MessageCircle,
+} from "lucide-react";
 
 const Footer = () => {
   return (
@@ -25,59 +31,87 @@ const Footer = () => {
                   <path d="M16 10a4 4 0 01-8 0" />
                 </svg>
               </div>
-              <span className="text-2xl font-bold tracking-tight">Footverse</span>
+              <span className="text-2xl font-bold tracking-tight">
+                Footverse
+              </span>
             </div>
             <p className="text-gray-500 text-lg leading-relaxed max-w-sm mb-8">
-              Seamless transactions, personalized insights, and innovative solutions for a smarter tomorrow.
+              Seamless transactions, personalized insights, and innovative
+              solutions for a smarter tomorrow.
             </p>
             <div className="flex items-center gap-3">
-              {[Facebook, Youtube, MessageCircle, Instagram, Twitter].map((Icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-100 shadow-sm hover:bg-gray-50 transition-colors"
-                >
-                  <Icon className="w-5 h-5 text-gray-700" />
-                </a>
-              ))}
+              {[Facebook, Youtube, MessageCircle, Instagram, Twitter].map(
+                (Icon, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-100 shadow-sm hover:bg-gray-50 transition-colors"
+                  >
+                    <Icon className="w-5 h-5 text-gray-700" />
+                  </a>
+                ),
+              )}
             </div>
           </div>
 
           {/* Links Columns */}
-          <div>
-            <h4 className="font-bold text-gray-900 mb-6 font-sans">About</h4>
+          <div className="hidden md:block">
+            <h4 className="mb-6">
+              <Link
+                to="/"
+                className="text-gray-500 hover:text-gray-900 transition-colors font-bold font-sans"
+              >
+                Home
+              </Link>
+            </h4>
             <ul className="space-y-4">
               {["Company", "Leadership", "Press", "Careers"].map((item) => (
                 <li key={item}>
-                  <Link to="#" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
+                  <p className="text-gray-500 transition-colors font-medium">
                     {item}
-                  </Link>
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-bold text-gray-900 mb-6 font-sans">Help</h4>
+          <div className="hidden md:block">
+            <h4 className="mb-6">
+              <Link
+                to="/contact"
+                className="text-gray-500 hover:text-gray-900 transition-colors font-bold font-sans"
+              >
+                Contact Us
+              </Link>
+            </h4>
             <ul className="space-y-4">
-              {["Help Center", "Support Team", "Community", "FAQs"].map((item) => (
-                <li key={item}>
-                  <Link to="#" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              {["Help Center", "Support Team", "Community", "FAQs"].map(
+                (item) => (
+                  <li key={item}>
+                    <p className="text-gray-500 transition-colors font-medium">
+                      {item}
+                    </p>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-bold text-gray-900 mb-6 font-sans">Menu</h4>
+          <div className="hidden md:block">
+            <h4 className="mb-6">
+              <Link
+                to="/product"
+                className="text-gray-500 hover:text-gray-900 transition-colors font-bold font-sans"
+              >
+                Product
+              </Link>
+            </h4>
             <ul className="space-y-4">
               {["Men", "Women", "Children", "Popular"].map((item) => (
                 <li key={item}>
-                  <Link to="#" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
+                  <p className="text-gray-500 transition-colors font-medium">
                     {item}
-                  </Link>
+                  </p>
                 </li>
               ))}
             </ul>
@@ -88,8 +122,12 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 font-medium">
           <p>© 2025 Footverse All Rights Reserved.</p>
           <div className="flex items-center gap-8">
-            <Link to="#" className="hover:text-gray-900 transition-colors">Company</Link>
-            <Link to="#" className="hover:text-gray-900 transition-colors">Privacy Policy</Link>
+            <Link to="#" className="hover:text-gray-900 transition-colors">
+              Company
+            </Link>
+            <Link to="#" className="hover:text-gray-900 transition-colors">
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>

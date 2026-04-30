@@ -23,7 +23,7 @@ export const getProducts = async (query = "shoes") => {
         order: "popular",
       },
     });
-
+    console.log(response);
     return response.data.hits;
   } catch (error) {
     console.error("Error fetching data:", error);

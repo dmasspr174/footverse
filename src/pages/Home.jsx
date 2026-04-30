@@ -36,7 +36,7 @@ function Home() {
             <p className="mt-6 md:mt-8 text-gray-600 text-base sm:text-lg md:text-xl max-w-sm sm:max-w-md leading-relaxed px-2 md:px-0">
               Discover comfort, performance, and design in every step you take.
             </p>
-            <button className="mt-8 md:mt-10 bg-[#1c1c1c] text-white px-8 py-3.5 rounded-full flex items-center gap-2 transition-colors font-medium w-fit">
+            <button className="mt-8 mb-6 md:mt-10 bg-[#1c1c1c] text-white px-8 py-3.5 rounded-full flex items-center gap-2 transition-colors font-medium w-fit">
               <Link to="/product">
                 Shop Now <span className="text-xl leading-none">&rarr;</span>
               </Link>
@@ -113,11 +113,6 @@ function Home() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="hidden md:block">
-            <CarouselPrevious className="-left-12" />
-            <CarouselNext className="-right-12" />
-          </div>
-          {/* Mobile controls inside if needed, or just touch scroll */}
         </Carousel>
       </div>
       {/* Shoes Care Section */}
