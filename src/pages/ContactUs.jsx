@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 function AboutUs() {
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+
   return (
     <div className="bg-[#f0f4f9] min-h-screen py-8 md:py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center font-sans text-slate-800">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
         {/* Left Column (Text Content) */}
         <div className="flex flex-col pt-8">
-          <h1 className="text-4xl md:text-[3.25rem] font-bold tracking-tight mb-6 text-slate-900">
-            Contact Us
-          </h1>
+          <h1 className="text-3xl font-bold font-serif mb-2">Contact Us</h1>
 
           <p className="text-slate-500 mb-8 max-w-md leading-relaxed text-sm md:text-[15px]">
             Email, call, or complete the form to learn how Footverse can solve
@@ -60,13 +60,21 @@ function AboutUs() {
 
         {/* Right Column (Form Card) */}
         <div className="  md:p-10 ">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126338.55381826295!2d113.99526224335939!3d-8.294856799999991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6ad254d55c68d%3A0x4f33633a94deae4b!2sIvori%20Shoes!5e0!3m2!1sen!2sid!4v1776062168137!5m2!1sen!2sid"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className=" rounded-3xl shadow-xl shadow-blue-900/5 w-full h-[450px] aspect-auto"
-          ></iframe>
+          <div className="relative w-full h-[450px] rounded-3xl shadow-xl shadow-blue-900/5 overflow-hidden">
+            {!isMapLoaded && (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse z-10"></div>
+            )}
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126338.55381826295!2d113.99526224335939!3d-8.294856799999991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6ad254d55c68d%3A0x4f33633a94deae4b!2sIvori%20Shoes!5e0!3m2!1sen!2sid!4v1776062168137!5m2!1sen!2sid"
+              allowFullScreen=""
+              loading="eager"
+              referrerPolicy="no-referrer-when-downgrade"
+              onLoad={() => setIsMapLoaded(true)}
+              className={`w-full h-full aspect-auto transition-opacity duration-500 ${
+                isMapLoaded ? "opacity-100" : "opacity-0"
+              }`}
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>

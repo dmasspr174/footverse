@@ -8,16 +8,20 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useCart } from "../components/CartContext";
 
 function Home() {
+  const { toggleCart, isInCart } = useCart();
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getImages("shoes", 12).then((data) => {
       setProducts(data);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     });
   }, []);
 
@@ -49,6 +53,7 @@ function Home() {
             <img
               src={heroImage}
               alt="Crazy Shoes"
+              fetchPriority="high"
               className="h-full md:h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
             />
           </div>
@@ -62,12 +67,15 @@ function Home() {
       {/* Products Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
         <div className="flex items-center justify-between mb-8 border-b pb-4">
-          <h2 className="text-3xl font-bold text-gray-800">BEST SELLERS</h2>
+          <h1 className="text-3xl font-bold text-gray-800 font-serif">
+            BEST SELLERS
+          </h1>
           <Link
             to="/product"
-            className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 transition-colors"
+            className="text-blue-600 hover:text-blue-800 mt-2 font-medium flex items-center gap-1 transition-colors"
           >
-            Show more <span className="text-md leading-none">&rarr;</span>
+            <p className="font-sans text-sm ">Show more</p>{" "}
+            <span className="text-md leading-none">&rarr;</span>
           </Link>
         </div>
 
@@ -79,44 +87,69 @@ function Home() {
           className="w-full"
         >
           <CarouselContent className="mb-4">
-            {products.map((product) => (
-              <CarouselItem
-                key={product.id}
-                className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-              >
-                <div className="bg-white rounded-lg shadow-md transition-shadow duration-300 overflow-hidden flex flex-col h-full">
-                  <div className="relative w-full overflow-hidden bg-gray-100">
-                    <div className="aspect-[4/3]">
-                      <img
-                        src={product.webformatURL}
-                        alt={product.tags}
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                      />
+            {isLoading
+              ? Array.from({ length: 4 }).map((_, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  >
+                    <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full animate-pulse">
+                      <div className="relative w-full overflow-hidden bg-gray-100">
+                        <div className="aspect-[4/3] bg-gray-200"></div>
+                      </div>
+                      <div className="flex flex-col justify-between p-4 flex-grow">
+                        <div>
+                          <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                        </div>
+                        <div className="flex items-center justify-between gap-4 mt-auto">
+                          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+                          <div className="h-10 bg-gray-200 rounded w-1/3"></div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col justify-between p-4 flex-grow">
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4 line-clamp-2 capitalize">
-                        {product.tags}
-                      </h3>
+                  </CarouselItem>
+                ))
+              : products.map((product) => (
+                  <CarouselItem
+                    key={product.id}
+                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  >
+                    <div className="bg-white rounded-lg shadow-md transition-shadow duration-300 overflow-hidden flex flex-col h-full">
+                      <div className="relative w-full overflow-hidden bg-gray-100">
+                        <div className="aspect-[4/3]">
+                          <img
+                            src={product.webformatURL}
+                            alt={product.tags}
+                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-between p-4 flex-grow">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-800 mb-4 line-clamp-2 capitalize">
+                            {product.tags}
+                          </h3>
+                        </div>
+                        <div className="flex items-center justify-between gap-4 mt-auto">
+                          <span className="text-2xl font-bold text-blue-500">
+                            ${product.likes}
+                          </span>
+                          <button
+                            onClick={() => toggleCart(product)}
+                            className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors cursor-pointer`}
+                          >
+                            {isInCart(product.id) ? "Remove" : "Add to Cart"}
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between gap-4 mt-auto">
-                      <span className="text-2xl font-bold text-blue-500">
-                        ${product.likes}
-                      </span>
-                      <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 whitespace-nowrap">
-                        Add to Cart
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
+                  </CarouselItem>
+                ))}
           </CarouselContent>
         </Carousel>
       </div>
       {/* Shoes Care Section */}
-      <h1 className="text-center mt-6 text-3xl font-bold text-gray-800 tracking-wider">
+      <h1 className="text-center mt-6 text-3xl font-bold text-gray-800 tracking-wider font-serif">
         SHOE CARE
       </h1>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-12 flex flex-col md:flex-row items-center md:gap-8 lg:gap-16">
@@ -124,12 +157,13 @@ function Home() {
           <img
             src={shoeCareImage}
             alt="Shoe Care"
+            loading="lazy"
             className="h-full lg:h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
           />
         </div>
 
         <div className="w-full md:w-1/2 flex flex-col md:items-start text-left px-2 md:px-0 max-w-xl">
-          <h2 className="text-3xl sm:text-4xl md:text-[2.5rem] font-bold text-[#1c1c1c] tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-[2.5rem] font-bold text-[#1c1c1c] tracking-tight leading-tight mb-4 font-sans">
             Caring for Your Shoes the Right Way
           </h2>
           <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-4">
@@ -177,6 +211,7 @@ function Home() {
           <img
             src={img2}
             alt=""
+            loading="lazy"
             className="w-full mt-6 lg:h-[600px] aspect-auto rounded-2xl shadow-lg hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
           />
         </div>
@@ -194,7 +229,7 @@ function Home() {
                 clipRule="evenodd"
               />
             </svg>
-            <h1 className="text-2xl font-bold">The Durability</h1>
+            <h2 className="text-2xl font-bold font-serif">The Durability</h2>
             <p className="text-gray-800 text-base mb-8 sm:text-lg leading-relaxed text-center">
               Built to handle maximum weight without losing shape
             </p>
@@ -212,7 +247,7 @@ function Home() {
                 clipRule="evenodd"
               />
             </svg>
-            <h1 className="text-2xl font-bold">The Speed</h1>
+            <h2 className="text-2xl font-bold font-serif">The Speed</h2>
             <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8">
               Express shipping if you order today, you will wear them sooner.
             </p>
@@ -230,7 +265,7 @@ function Home() {
                 clipRule="evenodd"
               />
             </svg>
-            <h1 className="text-2xl font-bold">The Guarantee</h1>
+            <h2 className="text-2xl font-bold font-serif">The Guarantee</h2>
             <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8">
               100% satisfaction guarantee or your money back.
             </p>

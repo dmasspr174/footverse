@@ -1,7 +1,9 @@
 import { useLikes } from "../components/LikesContext";
+import { useCart } from "../components/CartContext";
 
 export default function Likes() {
   const { likedProducts, toggleLike, isLiked } = useLikes();
+  const { toggleCart, isInCart } = useCart();
 
   if (likedProducts.length === 0) {
     return (
@@ -101,8 +103,11 @@ export default function Likes() {
                   <span className="text-blue-600 font-bold text-xl">
                     ${price}
                   </span>
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors cursor-pointer">
-                    Add to Cart
+                  <button
+                    onClick={() => toggleCart(img)}
+                    className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors cursor-pointer`}
+                  >
+                    {isInCart(img.id) ? "Remove" : "Add to Cart"}
                   </button>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useLikes } from "./LikesContext";
+import { useCart } from "./CartContext";
 import {
   Sheet,
   SheetContent,
@@ -16,7 +17,7 @@ export default function Navbar() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { likedProducts } = useLikes();
-
+  const { cartProducts } = useCart();
   const handleSearch = () => {
     if (query.trim()) {
       navigate("/search", { state: { query } });
@@ -28,11 +29,14 @@ export default function Navbar() {
   return (
     <nav className="bg-white text-slate-900 px-4 py-3 shadow-sm border-b border-slate-100">
       <div className="flex flex-col md:flex-row items-center justify-between m-auto ">
-        <div className="flex flex-row items-center  gap-8 w-full">
+        <div className="flex flex-row items-center  gap-8 w-full mb-2 md:mb-0">
           <div className="flex items-center flex-row justify-between  md:w-max w-full">
-            <p className="text-black text-2xl font-bold font-sans pb-2 ">
-              Footverse
-            </p>
+            <Link to="/">
+              <p className="text-black text-2xl font-bold font-sans pb-2 ">
+                Footverse
+              </p>
+            </Link>
+
             <div className="flex md:hidden flex-wrap  gap-2">
               <div className="flex flex-wrap gap-2">
                 <Sheet>
@@ -116,7 +120,7 @@ export default function Navbar() {
           </ul>
         </div>
 
-        <div className="flex items-center gap-3 min-w-[260px] w-full">
+        <div className="flex items-center gap-3 min-w-[260px] w-full md:w-1/2">
           <div className="relative flex-1">
             <input
               type="text"
@@ -147,9 +151,9 @@ export default function Navbar() {
               </svg>
             </span>
           </div>
-          <button
-            onClick={handleSearch}
-            className="rounded-full border border-slate-200 bg-slate-50 p-2 text-slate-700 transition hover:bg-slate-100"
+          <Link
+            to="/cart"
+            className="relative rounded-full border border-slate-200 bg-slate-50 p-2 text-slate-700 transition hover:bg-slate-100 hover:text-blue-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -162,10 +166,15 @@ export default function Navbar() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-          </button>
+            {cartProducts && cartProducts.length > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
+                {cartProducts.length}
+              </span>
+            )}
+          </Link>
           <Link
             to="/likes"
             className="relative rounded-full border border-slate-200 bg-slate-50 p-2 text-slate-700 transition hover:bg-slate-100 hover:text-red-500"
