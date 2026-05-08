@@ -60,13 +60,13 @@ export default function Navbar() {
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : "-100%" }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md text-slate-900 px-4 py-3 shadow-sm border-b border-slate-100 font-sans"
+      className="fixed top-0 left-0 right-0 z-50 bg-surface-white/80 backdrop-blur-md text-text-main px-md py-sm shadow-sm border-b border-surface-muted font-sans"
     >
       <div className="flex flex-col md:flex-row items-center justify-between m-auto container mx-auto">
-        <div className="flex flex-row items-center gap-8 w-full mb-2 md:mb-0">
+        <div className="flex flex-row items-center gap-4 w-full mb-3 md:mb-0">
           <div className="flex items-center flex-row justify-between  md:w-max w-full">
             <Link to="/">
-              <p className="text-black text-2xl font-bold font-sans pb-2 ">
+              <p className="text-text-main text-2xl font-bold font-sans pb-sm ">
                 Footverse
               </p>
             </Link>
@@ -76,7 +76,7 @@ export default function Navbar() {
                 {SHEET_SIDES.map((side) => (
                   <Sheet key={side}>
                     <SheetTrigger asChild>
-                      <Button className="bg-white text-black border-none ">
+                      <Button className="bg-surface-white text-text-main border-none" aria-label="Open Menu">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -104,7 +104,7 @@ export default function Navbar() {
                         <SheetClose asChild>
                           <Link
                             to="/"
-                            className="text-xl font-bold font-sans text-slate-500 transition hover:text-slate-800 hover:border-b-[2px] hover:border-slate-800 hover:pb-[1px]"
+                            className="text-xl font-bold font-sans text-text-muted transition hover:text-text-main hover:border-b-[2px] hover:border-text-main hover:pb-[1px]"
                           >
                             Home
                           </Link>
@@ -112,7 +112,7 @@ export default function Navbar() {
                         <SheetClose asChild>
                           <Link
                             to="/product"
-                            className="text-xl font-bold font-sans text-slate-500 transition hover:text-slate-800 hover:border-b-[2px] hover:border-slate-800 hover:pb-[1px]"
+                            className="text-xl font-bold font-sans text-text-muted transition hover:text-text-main hover:border-b-[2px] hover:border-text-main hover:pb-[1px]"
                           >
                             Product
                           </Link>
@@ -120,7 +120,7 @@ export default function Navbar() {
                         <SheetClose asChild>
                           <Link
                             to="/contact"
-                            className="text-xl font-bold font-sans text-slate-500 transition hover:text-slate-800 hover:border-b-[2px] hover:border-slate-800 hover:pb-[1px]"
+                            className="text-xl font-bold font-sans text-text-muted transition hover:text-text-main hover:border-b-[2px] hover:border-text-main hover:pb-[1px]"
                           >
                             Contact Us
                           </Link>
@@ -136,7 +136,7 @@ export default function Navbar() {
             <li>
               <Link
                 to="/"
-                className="text-slate-700 transition hover:text-blue-600 hover:border-b-[2px] hover:border-blue-600 hover:pb-[1px]"
+                className="text-text-body transition hover:text-brand-primary hover:border-b-[2px] hover:border-brand-primary hover:pb-[1px]"
               >
                 Home
               </Link>
@@ -144,7 +144,7 @@ export default function Navbar() {
             <li>
               <Link
                 to="/product"
-                className="text-slate-700 transition hover:text-blue-600 hover:border-b-[2px] hover:border-blue-600 hover:pb-[1px]"
+                className="text-text-body transition hover:text-brand-primary hover:border-b-[2px] hover:border-brand-primary hover:pb-[1px]"
               >
                 Product
               </Link>
@@ -152,7 +152,7 @@ export default function Navbar() {
             <li>
               <Link
                 to="/contact"
-                className="text-slate-700 transition hover:text-blue-600 hover:border-b-[2px] hover:border-blue-600 hover:pb-[1px]"
+                className="text-text-body transition hover:text-brand-primary hover:border-b-[2px] hover:border-brand-primary hover:pb-[1px]"
               >
                 Contact Us
               </Link>
@@ -172,9 +172,9 @@ export default function Navbar() {
                   handleSearch();
                 }
               }}
-              className="w-full rounded-full border border-slate-200 bg-slate-50 py-2 pl-10 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-full border border-surface-muted bg-surface-gray py-sm pl-10 pr-md text-sm text-text-main outline-none transition focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20"
             />{" "}
-            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-sm text-text-muted">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -193,7 +193,8 @@ export default function Navbar() {
           </div>
           <Link
             to="/cart"
-            className="relative rounded-full border border-slate-200 bg-slate-50 p-2 text-slate-700 transition hover:bg-slate-100 hover:text-blue-500"
+            className="relative rounded-full border border-surface-muted bg-surface-gray p-sm text-text-body transition hover:bg-surface-white hover:text-brand-primary"
+            aria-label="Shopping Cart"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +218,8 @@ export default function Navbar() {
           </Link>
           <Link
             to="/likes"
-            className="relative rounded-full border border-slate-200 bg-slate-50 p-2 text-slate-700 transition hover:bg-slate-100 hover:text-red-500"
+            className="relative rounded-full border border-surface-muted bg-surface-gray p-sm text-text-body transition hover:bg-surface-white hover:text-destructive"
+            aria-label="Liked Products"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

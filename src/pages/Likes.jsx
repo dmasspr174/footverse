@@ -14,7 +14,7 @@ export default function Likes() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-24 h-24 text-slate-300 mb-4"
+          className="w-24 h-24 text-surface-muted mb-lg"
         >
           <path
             strokeLinecap="round"
@@ -22,16 +22,16 @@ export default function Likes() {
             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
           />
         </svg>
-        <h2 className="text-2xl font-bold text-slate-700 mb-2">
+        <h2 className="text-2xl font-bold text-text-main mb-xs">
           No liked products yet
         </h2>
-        <p className="text-slate-500 max-w-sm mb-6">
+        <p className="text-text-muted max-w-sm mb-lg">
           You haven't added any products to your likes collection yet. Start
           exploring and save your favorites!
         </p>
         <a
           href="/product"
-          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors font-medium"
+          className="btn-primary rounded-full px-lg py-sm"
         >
           Explore Products
         </a>
@@ -42,8 +42,8 @@ export default function Likes() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Your Likes</h1>
-        <p className="text-gray-700">
+        <h1 className="text-3xl font-bold mb-xs text-text-main">Your Likes</h1>
+        <p className="text-text-body">
           A collection of all the items you've loved.
         </p>
       </div>
@@ -53,7 +53,7 @@ export default function Likes() {
           return (
             <div
               key={img.id}
-              className="flex flex-col border border-gray-100 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow"
+              className="flex flex-col border border-surface-gray rounded-card-md shadow-sm overflow-hidden bg-surface-white hover:shadow-md transition-shadow"
             >
               <div className="relative">
                 <img
@@ -63,7 +63,7 @@ export default function Likes() {
                 />
                 <button
                   onClick={() => toggleLike(img)}
-                  className="absolute top-3 right-3 p-2 bg-white/90 hover:bg-white rounded-full shadow-sm transition-colors text-red-500 z-10 cursor-pointer"
+                  className="absolute top-sm right-sm p-sm bg-surface-white/90 hover:bg-surface-white rounded-full shadow-sm transition-colors text-destructive z-10 cursor-pointer"
                 >
                   {isLiked(img.id) ? (
                     <svg
@@ -93,19 +93,19 @@ export default function Likes() {
                 </button>
               </div>
               <div className="p-5 flex flex-col flex-grow">
-                <p className="text-gray-700 text-sm mb-6 font-medium line-clamp-2">
+                <p className="text-text-body text-sm mb-lg font-medium line-clamp-2">
                   {img.tags
                     .split(", ")
                     .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
                     .join(", ")}
                 </p>
                 <div className="mt-auto flex justify-between items-center">
-                  <span className="text-blue-600 font-bold text-xl">
+                  <span className="text-brand-primary font-bold text-xl">
                     ${price}
                   </span>
                   <button
                     onClick={() => toggleCart(img)}
-                    className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors cursor-pointer`}
+                    className={`btn-primary px-md py-sm`}
                   >
                     {isInCart(img.id) ? "Remove" : "Add to Cart"}
                   </button>

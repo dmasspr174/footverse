@@ -26,8 +26,8 @@ function Search() {
   }, [query]);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <h1 className="text-3xl font-bold mb-8">Search Results for "{query}"</h1>
+    <div className="section-container py-xl md:py-2xl">
+      <h1 className="text-3xl font-bold font-sans text-text-main mb-xl">Search Results for "{query}"</h1>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {isLoading ? (
           Array.from({ length: 8 }).map((_, index) => (
@@ -54,7 +54,7 @@ function Search() {
           return (
             <div
               key={product.id}
-              className="flex flex-col border border-gray-100 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow"
+              className="flex flex-col border border-surface-gray rounded-card-md shadow-sm overflow-hidden bg-surface-white hover:shadow-md transition-shadow"
             >
               <img
                 src={product.webformatURL}
@@ -62,7 +62,7 @@ function Search() {
                 className="w-full h-64 object-cover"
               />
               <div className="p-5 flex flex-col flex-grow">
-                <p className="text-gray-700 text-sm mb-6 font-medium line-clamp-2">
+                <p className="text-text-body text-sm mb-lg font-medium line-clamp-2">
                   {/* Format tags to title case (e.g., "Shoes, Woman...") */}
                   {product.tags
                     ?.split(", ")
@@ -70,10 +70,10 @@ function Search() {
                     .join(", ")}
                 </p>
                 <div className="mt-auto flex justify-between items-center">
-                  <span className="text-blue-600 font-bold text-xl">
+                  <span className="text-brand-primary font-bold text-xl">
                     ${price}
                   </span>
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors cursor-pointer">
+                  <button className="btn-primary px-md py-sm">
                     Add to Cart
                   </button>
                 </div>

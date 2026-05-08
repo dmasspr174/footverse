@@ -10,16 +10,9 @@ import { useCart } from "../components/CartContext";
 import HeroCarousel from "@/components/HeroSection";
 import FeaturedGrid from "@/components/FeatureSection";
 import { Skeleton } from "@/components/ui/skeleton";
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
 import esensial1 from "../assets/3.jpg";
 import esensial2 from "../assets/4.jpg";
 import esensial3 from "../assets/1.jpg";
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
 
 function Home() {
   const { toggleCart, isInCart } = useCart();
@@ -27,48 +20,39 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getImages("shoes", 12).then((data) => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const data = await getImages("shoes", 12);
       setProducts(data);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-    });
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
 
   return (
-    <div className="bg-white font-sans">
-      {/* Hero Section */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInUp}
-        className="container mx-auto px-4 md:px-0 py-8 md:py-4"
-      >
+    <div className="bg-surface-white font-sans overflow-x-hidden">
+      {/* Hero Section - Static Import for LCP Performance */}
+      <div className="section-container md:px-0 py-xl md:py-sm min-h-[500px] md:min-h-[750px]">
         <HeroCarousel />
-      </motion.div>
+      </div>
+
       {/* Esenesial Section */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInUp}
-        className="container flex flex-col gap-6 mx-auto px-4 py-8"
-      >
-        <div className="text-start">
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] mb-3 font-sans leading-none">
-            ESSENTIAL KICKS
-          </h2>
-          <p className="text-gray-500 text-sm md:text-[15px] leading-relaxed max-w-2xl font-medium">
-            Elevate your everyday rotation with our handpicked essentials.
+      <div className="section-container py-xl md:py-2xl">
+        <div className="text-start mb-xl">
+          <h2 className="heading-primary mb-sm">Essential Kicks</h2>
+          <p className="text-text-muted text-sm md:text-[15px] leading-relaxed max-w-2xl font-medium">
             Designed for ultimate comfort and undeniable street appeal.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row gap-6 md:gap-12 w-full min-h-[300px] md:min-h-[400px]">
-          <div className="relative rounded-3xl overflow-hidden flex-1 h-full group">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-lg md:gap-12 w-full min-h-[400px]">
+          <div className="relative rounded-3xl overflow-hidden aspect-[4/5] group bg-surface-gray">
             <img
               src={esensial1}
-              alt="Sneakers"
+              alt="Classic Urban Sneakers Collection"
+              loading="eager"
+              decoding="async"
+              width="800"
+              height="1000"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
@@ -76,15 +60,19 @@ function Home() {
               <h3 className="text-white text-3xl font-serif mb-4 drop-shadow-md">
                 Sneakers
               </h3>
-              <button className="bg-white text-black px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors shadow-sm">
-                View all sneakers
+              <button className="btn-white" aria-label="View all sneakers">
+                View all
               </button>
             </div>
           </div>
-          <div className="relative rounded-3xl overflow-hidden flex-1 h-full group">
+          <div className="relative rounded-3xl overflow-hidden aspect-[4/5] group bg-surface-gray">
             <img
               src={esensial2}
-              alt="Sneakers"
+              alt="Performance Streetwear Shoes"
+              loading="eager"
+              decoding="async"
+              width="800"
+              height="1000"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
@@ -92,15 +80,19 @@ function Home() {
               <h3 className="text-white text-3xl font-serif mb-4 drop-shadow-md">
                 Sneakers
               </h3>
-              <button className="bg-white text-black px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors shadow-sm">
-                View all sneakers
+              <button className="btn-white" aria-label="View all sneakers">
+                View all
               </button>
             </div>
           </div>
-          <div className="relative rounded-3xl overflow-hidden flex-1 h-full group">
+          <div className="relative rounded-3xl overflow-hidden aspect-[4/5] group bg-surface-gray">
             <img
               src={esensial3}
-              alt="Sneakers"
+              alt="Limited Edition Urban Footwear"
+              loading="eager"
+              decoding="async"
+              width="800"
+              height="1000"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
@@ -108,44 +100,37 @@ function Home() {
               <h3 className="text-white text-3xl font-serif mb-4 drop-shadow-md">
                 Sneakers
               </h3>
-              <button className="bg-white text-black px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors shadow-sm">
-                View all sneakers
+              <button className="btn-white" aria-label="View all sneakers">
+                View all
               </button>
             </div>
           </div>
         </div>
-      </motion.div>
-      {/* Products Section */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInUp}
-        className="container mx-auto px-4 py-8"
-      >
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 border-b pb-4 gap-4">
-          <div className="text-start">
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] mb-3 font-sans leading-none">
-              BEST SELLERS
-            </h2>
-            <p className="text-gray-500 text-sm md:text-[15px] leading-relaxed max-w-2xl font-medium">
-              Our most coveted silhouettes, chosen by the culture. Don’t sleep
-              on these top-rated favorites.
+      </div>
+
+      {/* Best Sellers Section */}
+      <div className="section-container py-xl md:py-2xl">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-md mb-xl">
+          <div>
+            <h2 className="heading-primary mb-sm">BEST SELLERS</h2>
+            <p className="text-text-muted text-sm md:text-[15px] leading-relaxed max-w-xl font-medium">
+              Explore the sneakers that everyone is talking about. Hand-picked
+              styles that define modern street culture.
             </p>
           </div>
           <Link
             to="/product"
-            className="text-blue-600 hover:text-blue-800 mt-2 font-medium flex items-center gap-1 transition-colors whitespace-nowrap pb-1"
+            className="text-brand-primary font-bold text-sm hover:underline"
+            aria-label="Browse all best selling products"
           >
-            <p className="font-sans text-sm ">Show more</p>{" "}
-            <span className="text-md leading-none">&rarr;</span>
+            Explore all products
           </Link>
         </div>
 
         <Carousel
           opts={{
             align: "start",
-            loop: false,
+            loop: true,
           }}
           className="w-full"
         >
@@ -179,10 +164,12 @@ function Home() {
                   >
                     <div className=" rounded-lg duration-300 overflow-hidden flex flex-col h-full">
                       <div className="relative w-full overflow-hidden ">
-                        <div className="aspect-[4/4] rounded-xl overflow-hidden">
+                        <div className="aspect-[4/4] rounded-xl overflow-hidden bg-surface-gray">
                           <img
                             src={product.webformatURL}
                             alt={product.tags}
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                           />
                         </div>
@@ -194,12 +181,13 @@ function Home() {
                           </h3>
                         </div>
                         <div className="flex items-center justify-between gap-4 mt-auto">
-                          <span className="text-2xl font-bold text-blue-500">
+                          <span className="text-2xl font-bold text-brand-accent">
                             ${product.likes}
                           </span>
                           <button
                             onClick={() => toggleCart(product)}
-                            className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors cursor-pointer`}
+                            className="btn-primary px-4 py-2"
+                            aria-label={`Add ${product.tags} to shopping cart`}
                           >
                             {isInCart(product.id) ? "Remove" : "Add to Cart"}
                           </button>
@@ -210,146 +198,64 @@ function Home() {
                 ))}
           </CarouselContent>
         </Carousel>
-      </motion.div>
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInUp}
-        className="container mx-auto px-4 py-8"
-      >
+      </div>
+
+      {/* Featured Grid Section */}
+      <div className="container mx-auto px-4 py-8">
         <FeaturedGrid />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeInUp}
-        className="relative container mx-auto px-4 py-8"
-      >
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-          {/* Header Section (Left on Desktop) */}
-          <div className="lg:w-1/3 text-start">
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] mb-6 font-sans leading-[1.1]">
-              WHY SHOP WITH US?
-            </h2>
-            <p className="text-gray-500 text-[15px] leading-relaxed font-medium">
-              We've got you covered with hassle-free shopping, top-tier service,
-              and guarantees that keep you confident in every purchase.
-            </p>
-          </div>
-          {/* Features Grid (Right on Desktop) */}
-          <div className="lg:w-2/3 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-8 sm:gap-y-12">
-            {/* Feature 1 */}
-            <div className="flex flex-col text-start">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
+      {/* Trust Badges */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            {
+              title: "Fast Delivery",
+              desc: "Get your kicks delivered express to your doorstep.",
+              icon: "M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.129-1.125V11.25c0-4.446-3.61-8.057-8.057-8.057h-3.321C6.437 3.193 3 6.63 3 10.82v3.43m18.25 4.5V11.25a1.125 1.125 0 00-1.125-1.125H16.875M3.375 14.25h17.25",
+            },
+            {
+              title: "Secure Payment",
+              desc: "Safe and encrypted transactions with our gateway.",
+              icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6.119c-.035 1.05-.035 2.108 0 3.158a12.735 12.735 0 0014.154 11.592c1.05-.035 2.108-.035 3.158 0A11.959 11.959 0 0112 2.714Z",
+            },
+            {
+              title: "30 Days Return",
+              desc: "Hassle-free returns and exchanges within 30 days.",
+              icon: "M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9",
+            },
+            {
+              title: "24/7 Support",
+              desc: "Our dedicated team is here for you anytime.",
+              icon: "M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z",
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col items-center text-center p-6 bg-slate-50 rounded-2xl"
+            >
+              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
+                  className="w-6 h-6 text-blue-600"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.622v5.245a2.25 2.25 0 0 1-2.25 2.25h-2.25m-6.75-2.25h1m2.25 0h1m2.25 0h1"
+                    d={item.icon}
                   />
                 </svg>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
-                Free Delivery
-              </h3>
-              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
-                Get your streetwear fast and free, with no extra shipping costs
-                on all orders.
-              </p>
+              <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+              <p className="text-gray-500 text-sm">{item.desc}</p>
             </div>
-
-            {/* Feature 2 */}
-            <div className="flex flex-col text-start">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V5.903c0-.754-.726-1.294-1.453-1.096a59.769 59.769 0 0 1-15.797 2.101c-.727.198-1.453-.342-1.453-1.096V17.654c0 .754.726 1.294 1.453 1.096ZM12 15.75a3.75 3.75 0 1 1 0-7.5 3.75 3.75 0 0 1 0 7.5Z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
-                100% Secure Payment
-              </h3>
-              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
-                Shop with confidence using encrypted, safe, and trusted payment
-                methods.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="flex flex-col text-start">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
-                30 Days Return
-              </h3>
-              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
-                Not the perfect fit? No worries. Return or exchange hassle-free
-                within 30 days.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="flex flex-col text-start">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
-                24/7 Support
-              </h3>
-              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
-                Got questions? Our team is here for you anytime, anywhere.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

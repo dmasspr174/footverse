@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+const Footer = lazy(() => import("./components/Footer"));
 import TopLoader from "./components/TopLoader";
 
 // Lazy load pages
@@ -16,7 +16,7 @@ export default function App() {
   return (
     <Router>
       <Navbar />
-      <div className="pt-24 md:pt-20">
+      <div className="pt-[100px] md:pt-[100px]">
         <Suspense fallback={<TopLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -27,7 +27,9 @@ export default function App() {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Suspense>
-        <Footer />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
       </div>
     </Router>
   );

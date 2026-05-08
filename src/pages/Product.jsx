@@ -23,10 +23,12 @@ function Product() {
   }, [query]);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div className="section-container ">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold font-serif mb-2">Our Collection</h1>
-        <p className="text-gray-700">
+        <h1 className="text-3xl font-bold font-serif mb-xs text-text-main">
+          Our Collection
+        </h1>
+        <p className="text-text-body">
           Discover the latest styles designed for comfort, performance, and
           everyday wear.
         </p>
@@ -37,10 +39,10 @@ function Product() {
           <button
             key={item}
             onClick={() => setQuery(item)}
-            className={`font-semibold py-1 px-10 border rounded transition-colors ${
+            className={`font-semibold py-sm px-10 border rounded transition-colors ${
               query === item
-                ? "bg-blue-500 text-white border-transparent"
-                : "bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border-blue-500 hover:border-transparent"
+                ? "bg-brand-accent text-text-contrast border-transparent"
+                : "bg-transparent hover:bg-brand-accent text-brand-primary hover:text-text-contrast border-brand-primary hover:border-transparent"
             }`}
           >
             {item}
@@ -73,17 +75,21 @@ function Product() {
               return (
                 <div
                   key={img.id}
-                  className="flex flex-col border border-gray-100 rounded-lg shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow"
+                  className="flex flex-col border border-surface-gray rounded-card-md shadow-sm overflow-hidden bg-surface-white hover:shadow-md transition-shadow"
                 >
                   <div className="relative">
-                    <img
-                      src={img.webformatURL}
-                      alt={img.tags}
-                      className="w-full h-64 object-cover"
-                    />
+                    <div className="aspect-square overflow-hidden bg-surface-muted">
+                      <img
+                        src={img.webformatURL}
+                        alt={img.tags}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <button
                       onClick={() => toggleLike(img)}
-                      className="absolute top-3 right-3 p-2 bg-white/90 hover:bg-white rounded-full shadow-sm transition-colors text-red-500 z-10 cursor-pointer"
+                      className="absolute top-sm right-sm p-sm bg-surface-white/90 hover:bg-surface-white rounded-full shadow-sm transition-colors text-destructive z-10 cursor-pointer"
                     >
                       {isLiked(img.id) ? (
                         <svg
@@ -113,7 +119,7 @@ function Product() {
                     </button>
                   </div>
                   <div className="p-5 flex flex-col flex-grow">
-                    <p className="text-gray-700 text-sm mb-6 font-medium line-clamp-2">
+                    <p className="text-text-body text-sm mb-lg font-medium line-clamp-2">
                       {img.tags
                         .split(", ")
                         .map(
@@ -122,16 +128,16 @@ function Product() {
                         .join(", ")}
                     </p>
                     <div className="mt-auto flex justify-between items-center">
-                      <span className="text-blue-600 font-bold text-xl">
+                      <span className="text-brand-primary font-bold text-xl">
                         ${price}
                       </span>
                       <button
                         onClick={() => toggleCart(img)}
                         className={`${
                           isInCart(img.id)
-                            ? "bg-slate-200 text-slate-800 hover:bg-slate-300"
-                            : "bg-blue-600 hover:bg-blue-700 text-white"
-                        } px-4 py-2 rounded text-sm transition-colors cursor-pointer`}
+                            ? "bg-surface-muted text-text-body hover:bg-surface-gray"
+                            : "btn-primary"
+                        } px-md py-sm`}
                       >
                         {isInCart(img.id) ? "Remove" : "Add to Cart"}
                       </button>

@@ -1,16 +1,49 @@
 @import "tw-animate-css";
-/* @import "shadcn/tailwind.css"; */
 @import "@fontsource-variable/geist";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  .theme {
-    --font-heading: var(--font-sans);
-    --font-sans: "Geist Variable", sans-serif;
-  }
   :root {
+    /* --- BRAND TOKENS --- */
+    --color-brand-primary: #2563eb;
+    --color-brand-primary-hover: #1d4ed8;
+    --color-brand-accent: #3b82f6;
+    
+    /* --- SURFACE TOKENS --- */
+    --color-surface-white: #ffffff;
+    --color-surface-gray: #f3f4f6;
+    --color-surface-dark: #000000;
+    --color-surface-muted: #e5e7eb;
+    
+    /* --- TEXT TOKENS --- */
+    --color-text-main: #111111;
+    --color-text-body: #1f2937;
+    --color-text-muted: #555555;
+    --color-text-contrast: #ffffff;
+
+    /* --- FONT TOKENS --- */
+    --font-family-sans: "Geist Variable", sans-serif;
+    --font-family-serif: serif;
+
+    /* --- SPACING TOKENS --- */
+    --spacing-xs: 0.25rem;    /* 4px */
+    --spacing-sm: 0.5rem;     /* 8px */
+    --spacing-md: 1rem;       /* 16px */
+    --spacing-lg: 1.5rem;     /* 24px */
+    --spacing-xl: 2rem;       /* 32px */
+    --spacing-2xl: 3rem;      /* 48px */
+    --spacing-3xl: 4rem;      /* 64px */
+    --spacing-section: 5rem;  /* 80px */
+
+    /* --- RADIUS TOKENS --- */
+    --radius-md: 0.75rem;     /* 12px */
+    --radius-lg: 1.5rem;      /* 24px */
+    --radius-xl: 2.5rem;      /* 40px */
+    --radius-full: 9999px;
+
+    /* --- SHADCN BASE (DO NOT CHANGE) --- */
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -29,21 +62,9 @@
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
   }
+
   .dark {
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
@@ -63,32 +84,58 @@
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
   }
+
   * {
     border-color: var(--border);
     outline-color: var(--ring);
   }
+
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--color-surface-white);
+    color: var(--color-text-body);
+    font-family: var(--font-family-sans);
+    -webkit-font-smoothing: antialiased;
   }
-  html {
-    font-family: var(--font-sans);
+}
+
+@layer components {
+  /* Reusable Components Classes */
+  .section-container {
+    @apply container mx-auto px-4;
   }
-  h1 {
-    @apply text-3xl font-bold text-gray-800 font-serif;
+
+  .heading-primary {
+    @apply text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none font-sans;
+    color: var(--color-text-main);
+  }
+
+  .text-muted {
+    @apply text-sm md:text-[15px] leading-relaxed font-medium;
+    color: var(--color-text-muted);
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded text-sm transition-colors cursor-pointer font-medium;
+    background-color: var(--color-brand-primary);
+    color: var(--color-text-contrast);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-brand-primary-hover);
+  }
+
+  .btn-white {
+    @apply px-6 py-2.5 rounded-xl text-sm font-bold transition-colors shadow-sm;
+    background-color: var(--color-surface-white);
+    color: var(--color-surface-dark);
+  }
+
+  .btn-white:hover {
+    background-color: var(--color-surface-gray);
+  }
+
+  .card-rounded {
+    border-radius: var(--radius-lg);
   }
 }
