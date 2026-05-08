@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLikes } from "./LikesContext";
 import { useCart } from "./CartContext";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import {
   Sheet,
   SheetContent,
@@ -18,18 +20,50 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { likedProducts } = useLikes();
   const { cartProducts } = useCart();
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const handleSearch = () => {
     if (query.trim()) {
       navigate("/search", { state: { query } });
     }
   };
 
-  const SHEET_SIDES = ["top", "right", "bottom", "left"];
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== "undefined") {
+        if (window.scrollY > lastScrollY && window.scrollY > 100) {
+          // if scroll down hide the navbar
+          setIsVisible(false);
+        } else {
+          // if scroll up show the navbar
+          setIsVisible(true);
+        }
+
+        // remember current page location to use next time
+        setLastScrollY(window.scrollY);
+      }
+    };
+
+    window.addEventListener("scroll", controlNavbar);
+
+    // cleanup function
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
+
+  const SHEET_SIDES = ["left"];
 
   return (
-    <nav className="bg-white text-slate-900 px-4 py-3 shadow-sm border-b border-slate-100">
-      <div className="flex flex-col md:flex-row items-center justify-between m-auto ">
-        <div className="flex flex-row items-center  gap-8 w-full mb-2 md:mb-0">
+    <motion.nav
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : "-100%" }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md text-slate-900 px-4 py-3 shadow-sm border-b border-slate-100 font-sans"
+    >
+      <div className="flex flex-col md:flex-row items-center justify-between m-auto container mx-auto">
+        <div className="flex flex-row items-center gap-8 w-full mb-2 md:mb-0">
           <div className="flex items-center flex-row justify-between  md:w-max w-full">
             <Link to="/">
               <p className="text-black text-2xl font-bold font-sans pb-2 ">
@@ -37,58 +71,64 @@ export default function Navbar() {
               </p>
             </Link>
 
-            <div className="flex md:hidden flex-wrap  gap-2">
-              <div className="flex flex-wrap gap-2">
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-8 "
+            <div className="flex md:hidden flex-wrap">
+              <div className="flex ">
+                {SHEET_SIDES.map((side) => (
+                  <Sheet key={side}>
+                    <SheetTrigger asChild>
+                      <Button className="bg-white text-black border-none ">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                          />
+                        </svg>
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent
+                      side={side}
+                      className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                      />
-                    </svg>
-                  </SheetTrigger>
-                  <SheetContent
-                    side="top"
-                    className="h-full w-full p-8 flex flex-col justify-center items-center"
-                  >
-                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                    <div className="flex flex-row items-center gap-4 py-6 px">
-                      <SheetClose asChild>
-                        <Link
-                          to="/"
-                          className="text-1xl font-bold text-slate-800 transition hover:text-blue-600 hover:border-b-[2px] hover:border-blue-600 hover:pb-[1px]"
-                        >
-                          Home
-                        </Link>
-                      </SheetClose>
-                      <SheetClose asChild>
-                        <Link
-                          to="/product"
-                          className="text-1xl font-bold text-slate-800 transition hover:text-blue-600 hover:border-b-[2px] hover:border-blue-600 hover:pb-[1px]"
-                        >
-                          Product
-                        </Link>
-                      </SheetClose>
-                      <SheetClose asChild>
-                        <Link
-                          to="/contact"
-                          className="text-1xl font-bold text-slate-800 transition hover:text-blue-600 hover:border-b-[2px] hover:border-blue-600 hover:pb-[1px]"
-                        >
-                          Contact Us
-                        </Link>
-                      </SheetClose>
-                    </div>
-                  </SheetContent>
-                </Sheet>
+                      <SheetTitle className="sr-only">
+                        Navigation Menu
+                      </SheetTitle>
+                      <div className="flex flex-col  gap-4 py-6 px-6">
+                        <SheetClose asChild>
+                          <Link
+                            to="/"
+                            className="text-xl font-bold font-sans text-slate-500 transition hover:text-slate-800 hover:border-b-[2px] hover:border-slate-800 hover:pb-[1px]"
+                          >
+                            Home
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            to="/product"
+                            className="text-xl font-bold font-sans text-slate-500 transition hover:text-slate-800 hover:border-b-[2px] hover:border-slate-800 hover:pb-[1px]"
+                          >
+                            Product
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            to="/contact"
+                            className="text-xl font-bold font-sans text-slate-500 transition hover:text-slate-800 hover:border-b-[2px] hover:border-slate-800 hover:pb-[1px]"
+                          >
+                            Contact Us
+                          </Link>
+                        </SheetClose>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+                ))}
               </div>
             </div>
           </div>
@@ -201,6 +241,6 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

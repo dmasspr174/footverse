@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../api";
 import { useLikes } from "../components/LikesContext";
 import { useCart } from "../components/CartContext";
+import { Skeleton } from "../components/ui/skeleton";
 
 function Product() {
   const [images, setImages] = useState([]);
@@ -52,14 +53,17 @@ function Product() {
           ? Array.from({ length: 8 }).map((_, index) => (
               <div
                 key={index}
-                className="flex flex-col border border-gray-100 rounded-lg shadow-sm overflow-hidden bg-white animate-pulse"
+                className="flex flex-col border border-gray-100 rounded-lg shadow-sm overflow-hidden bg-white"
               >
-                <div className="w-full h-64 bg-gray-200"></div>
+                <Skeleton className="w-full h-64 rounded-none" />
                 <div className="p-5 flex flex-col flex-grow">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-6"></div>
+                  <div className="space-y-2 mb-6">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                  </div>
                   <div className="mt-auto flex justify-between items-center">
-                    <div className="h-6 bg-gray-200 rounded w-1/4"></div>
-                    <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+                    <Skeleton className="h-6 w-1/4" />
+                    <Skeleton className="h-8 w-1/3 rounded-lg" />
                   </div>
                 </div>
               </div>

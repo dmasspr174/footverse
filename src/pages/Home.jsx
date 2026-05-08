@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { getImages } from "../api";
-import heroImage from "../assets/1.jpg";
-import shoeCareImage from "../assets/4.jpg";
-import img2 from "../assets/3.jpg";
 import { Link } from "react-router-dom";
 import {
   Carousel,
@@ -10,6 +7,19 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useCart } from "../components/CartContext";
+import HeroCarousel from "@/components/HeroSection";
+import FeaturedGrid from "@/components/FeatureSection";
+import { Skeleton } from "@/components/ui/skeleton";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import esensial1 from "../assets/3.jpg";
+import esensial2 from "../assets/4.jpg";
+import esensial3 from "../assets/1.jpg";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 
 function Home() {
   const { toggleCart, isInCart } = useCart();
@@ -26,53 +36,106 @@ function Home() {
   }, []);
 
   return (
-    <div className="bg-white font-sans overflow-hidden">
+    <div className="bg-white font-sans">
       {/* Hero Section */}
-      <div className="relative min-h-[50svh] md:min-h-[90vh] flex items-center lg:pt-20 pb-16 md:py-0">
-        <div className="container mx-auto px-4  md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between gap-6md:gap-0">
-          {/* Left Content */}
-          <div className="w-full md:w-1/2 z-10 flex flex-col items-center text-center md:items-start md:text-left pt-12 md:pt-0">
-            <h1 className="text-[4rem] min-[400px]:text-[5rem] sm:text-8xl md:text-[5.5rem] lg:text-[7.5rem] xl:text-[9rem] font-black text-[#1c1c1c] leading-[0.85] tracking-tighter uppercase pb-2 w-full">
-              Move
-              <br />
-              Bold
-            </h1>
-            <p className="mt-6 md:mt-8 text-gray-600 text-base sm:text-lg md:text-xl max-w-sm sm:max-w-md leading-relaxed px-2 md:px-0">
-              Discover comfort, performance, and design in every step you take.
-            </p>
-            <button className="mt-8 mb-6 md:mt-10 bg-[#1c1c1c] text-white px-8 py-3.5 rounded-full flex items-center gap-2 transition-colors font-medium w-fit">
-              <Link to="/product">
-                Shop Now <span className="text-xl leading-none">&rarr;</span>
-              </Link>
-            </button>
-          </div>
-
-          {/* Right Content */}
-          <div className="mt-4 w-full md:w-1/2 relative flex justify-center items-center z-0 px-4 md:px-0">
-            {/* Shoe image */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="container mx-auto px-4 md:px-0 py-8 md:py-4"
+      >
+        <HeroCarousel />
+      </motion.div>
+      {/* Esenesial Section */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="container flex flex-col gap-6 mx-auto px-4 py-8"
+      >
+        <div className="text-start">
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] mb-3 font-sans leading-none">
+            ESSENTIAL KICKS
+          </h2>
+          <p className="text-gray-500 text-sm md:text-[15px] leading-relaxed max-w-2xl font-medium">
+            Elevate your everyday rotation with our handpicked essentials.
+            Designed for ultimate comfort and undeniable street appeal.
+          </p>
+        </div>
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12 w-full min-h-[300px] md:min-h-[400px]">
+          <div className="relative rounded-3xl overflow-hidden flex-1 h-full group">
             <img
-              src={heroImage}
-              alt="Crazy Shoes"
-              fetchPriority="high"
-              className="h-full md:h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
+              src={esensial1}
+              alt="Sneakers"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+            <div className="absolute bottom-8 left-8">
+              <h3 className="text-white text-3xl font-serif mb-4 drop-shadow-md">
+                Sneakers
+              </h3>
+              <button className="bg-white text-black px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors shadow-sm">
+                View all sneakers
+              </button>
+            </div>
+          </div>
+          <div className="relative rounded-3xl overflow-hidden flex-1 h-full group">
+            <img
+              src={esensial2}
+              alt="Sneakers"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+            <div className="absolute bottom-8 left-8">
+              <h3 className="text-white text-3xl font-serif mb-4 drop-shadow-md">
+                Sneakers
+              </h3>
+              <button className="bg-white text-black px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors shadow-sm">
+                View all sneakers
+              </button>
+            </div>
+          </div>
+          <div className="relative rounded-3xl overflow-hidden flex-1 h-full group">
+            <img
+              src={esensial3}
+              alt="Sneakers"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+            <div className="absolute bottom-8 left-8">
+              <h3 className="text-white text-3xl font-serif mb-4 drop-shadow-md">
+                Sneakers
+              </h3>
+              <button className="bg-white text-black px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors shadow-sm">
+                View all sneakers
+              </button>
+            </div>
           </div>
         </div>
-
-        {/* Scroll Down text */}
-        <div className="hidden md:flex absolute right-6 lg:right-12 bottom-32 -rotate-90 origin-right text-gray-500 text-sm tracking-widest items-center gap-2 font-light">
-          Scroll Down
-        </div>
-      </div>
+      </motion.div>
       {/* Products Section */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
-        <div className="flex items-center justify-between mb-8 border-b pb-4">
-          <h1 className="text-3xl font-bold text-gray-800 font-serif">
-            BEST SELLERS
-          </h1>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="container mx-auto px-4 py-8"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 border-b pb-4 gap-4">
+          <div className="text-start">
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] mb-3 font-sans leading-none">
+              BEST SELLERS
+            </h2>
+            <p className="text-gray-500 text-sm md:text-[15px] leading-relaxed max-w-2xl font-medium">
+              Our most coveted silhouettes, chosen by the culture. Don’t sleep
+              on these top-rated favorites.
+            </p>
+          </div>
           <Link
             to="/product"
-            className="text-blue-600 hover:text-blue-800 mt-2 font-medium flex items-center gap-1 transition-colors"
+            className="text-blue-600 hover:text-blue-800 mt-2 font-medium flex items-center gap-1 transition-colors whitespace-nowrap pb-1"
           >
             <p className="font-sans text-sm ">Show more</p>{" "}
             <span className="text-md leading-none">&rarr;</span>
@@ -88,22 +151,22 @@ function Home() {
         >
           <CarouselContent className="mb-4">
             {isLoading
-              ? Array.from({ length: 4 }).map((_, index) => (
+              ? Array.from({ length: 3 }).map((_, index) => (
                   <CarouselItem
                     key={index}
-                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 "
                   >
-                    <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full animate-pulse">
-                      <div className="relative w-full overflow-hidden bg-gray-100">
-                        <div className="aspect-[4/3] bg-gray-200"></div>
+                    <div className="bg-white rounded-lg overflow-hidden flex flex-col h-full">
+                      <div className="relative w-full overflow-hidden">
+                        <Skeleton className="aspect-square rounded-xl" />
                       </div>
                       <div className="flex flex-col justify-between p-4 flex-grow">
-                        <div>
-                          <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                        <div className="space-y-3">
+                          <Skeleton className="h-6 w-3/4" />
                         </div>
-                        <div className="flex items-center justify-between gap-4 mt-auto">
-                          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-                          <div className="h-10 bg-gray-200 rounded w-1/3"></div>
+                        <div className="flex items-center justify-between gap-4 mt-6">
+                          <Skeleton className="h-8 w-1/4" />
+                          <Skeleton className="h-10 w-1/3 rounded-lg" />
                         </div>
                       </div>
                     </div>
@@ -112,11 +175,11 @@ function Home() {
               : products.map((product) => (
                   <CarouselItem
                     key={product.id}
-                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                    className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
                   >
-                    <div className="bg-white rounded-lg shadow-md transition-shadow duration-300 overflow-hidden flex flex-col h-full">
-                      <div className="relative w-full overflow-hidden bg-gray-100">
-                        <div className="aspect-[4/3]">
+                    <div className=" rounded-lg duration-300 overflow-hidden flex flex-col h-full">
+                      <div className="relative w-full overflow-hidden ">
+                        <div className="aspect-[4/4] rounded-xl overflow-hidden">
                           <img
                             src={product.webformatURL}
                             alt={product.tags}
@@ -147,131 +210,146 @@ function Home() {
                 ))}
           </CarouselContent>
         </Carousel>
-      </div>
-      {/* Shoes Care Section */}
-      <h1 className="text-center mt-6 text-3xl font-bold text-gray-800 tracking-wider font-serif">
-        SHOE CARE
-      </h1>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-12 flex flex-col md:flex-row items-center md:gap-8 lg:gap-16">
-        <div className="w-full md:w-1/2 flex justify-center md:justify-center mb-8 md:mb-0">
-          <img
-            src={shoeCareImage}
-            alt="Shoe Care"
-            loading="lazy"
-            className="h-full lg:h-[450px]  aspect-auto rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
-          />
-        </div>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="container mx-auto px-4 py-8"
+      >
+        <FeaturedGrid />
+      </motion.div>
 
-        <div className="w-full md:w-1/2 flex flex-col md:items-start text-left px-2 md:px-0 max-w-xl">
-          <h2 className="text-3xl sm:text-4xl md:text-[2.5rem] font-bold text-[#1c1c1c] tracking-tight leading-tight mb-4 font-sans">
-            Caring for Your Shoes the Right Way
-          </h2>
-          <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-4">
-            It’s not just about the buy—it's about the care. Master everything
-            from brushing techniques to storage hacks, and keep your kicks
-            looking like they just came out of the box.
-          </p>
-
-          <h3 className="font-bold text-gray-900 text-lg sm:text-xl mb-2">
-            Essential Care Tips:
-          </h3>
-
-          <ul className="space-y-4">
-            {[
-              "Clean Immediately",
-              "Match the Material",
-              "Air Dry Only",
-              "Store Dry",
-              "Rotate Pairs",
-            ].map((tip, index) => (
-              <li key={index} className="flex items-center gap-3 text-gray-700">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="relative container mx-auto px-4 py-8"
+      >
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+          {/* Header Section (Left on Desktop) */}
+          <div className="lg:w-1/3 text-start">
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] mb-6 font-sans leading-[1.1]">
+              WHY SHOP WITH US?
+            </h2>
+            <p className="text-gray-500 text-[15px] leading-relaxed font-medium">
+              We've got you covered with hassle-free shopping, top-tier service,
+              and guarantees that keep you confident in every purchase.
+            </p>
+          </div>
+          {/* Features Grid (Right on Desktop) */}
+          <div className="lg:w-2/3 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-8 sm:gap-y-12">
+            {/* Feature 1 */}
+            <div className="flex flex-col text-start">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
                 <svg
-                  className="w-6 h-6 text-gray-900 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
+                    d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.622v5.245a2.25 2.25 0 0 1-2.25 2.25h-2.25m-6.75-2.25h1m2.25 0h1m2.25 0h1"
+                  />
                 </svg>
-                <span className="font-medium text-base sm:text-lg">{tip}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      {/**/}
-      <div className="relative mx-auto lg:mx-16 px-4 ">
-        <div>
-          <img
-            src={img2}
-            alt=""
-            loading="lazy"
-            className="w-full mt-6 lg:h-[600px] aspect-auto rounded-2xl shadow-lg hover:scale-[1.02] transition-transform duration-500 ease-out object-cover"
-          />
-        </div>
-        <div className="my-12 w-full grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          <div className="relative flex flex-col px-4 text-center rounded-2xl items-center justify-center w-full max-w-[400px] mx-auto h-[200px] border-2 border-gray-100 shadow-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <h2 className="text-2xl font-bold font-serif">The Durability</h2>
-            <p className="text-gray-800 text-base mb-8 sm:text-lg leading-relaxed text-center">
-              Built to handle maximum weight without losing shape
-            </p>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
+                Free Delivery
+              </h3>
+              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
+                Get your streetwear fast and free, with no extra shipping costs
+                on all orders.
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="flex flex-col text-start">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V5.903c0-.754-.726-1.294-1.453-1.096a59.769 59.769 0 0 1-15.797 2.101c-.727.198-1.453-.342-1.453-1.096V17.654c0 .754.726 1.294 1.453 1.096ZM12 15.75a3.75 3.75 0 1 1 0-7.5 3.75 3.75 0 0 1 0 7.5Z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
+                100% Secure Payment
+              </h3>
+              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
+                Shop with confidence using encrypted, safe, and trusted payment
+                methods.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="flex flex-col text-start">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
+                30 Days Return
+              </h3>
+              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
+                Not the perfect fit? No worries. Return or exchange hassle-free
+                within 30 days.
+              </p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="flex flex-col text-start">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-200 flex items-center justify-center mb-4 sm:mb-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold font-sans tracking-tight mb-2 sm:mb-3">
+                24/7 Support
+              </h3>
+              <p className="text-gray-500 text-[13px] sm:text-[15px] leading-relaxed">
+                Got questions? Our team is here for you anytime, anywhere.
+              </p>
+            </div>
           </div>
-          <div className="relative flex flex-col px-4 text-center rounded-2xl items-center justify-center w-full max-w-[400px] mx-auto h-[200px]  border-2 border-gray-100 shadow-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path
-                fillRule="evenodd"
-                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <h2 className="text-2xl font-bold font-serif">The Speed</h2>
-            <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8">
-              Express shipping if you order today, you will wear them sooner.
-            </p>
-          </div>
-          <div className="relative flex flex-col px-4 text-center rounded-2xl items-center justify-center w-full max-w-[400px] mx-auto h-[200px] border-2 border-gray-100 shadow-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <h2 className="text-2xl font-bold font-serif">The Guarantee</h2>
-            <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8">
-              100% satisfaction guarantee or your money back.
-            </p>
-          </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
