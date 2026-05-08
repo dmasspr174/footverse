@@ -1,5 +1,9 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
+import feature1 from "../assets/17.jpg";
+import feature2 from "../assets/14.jpg";
+import feature3 from "../assets/11.jpg";
+import feature4 from "../assets/18.jpg";
 
 export default function FeaturedGrid() {
   return (
@@ -9,7 +13,9 @@ export default function FeaturedGrid() {
           NEW DROPS
         </h2>
         <p className="text-gray-500 text-sm md:text-[15px] leading-relaxed max-w-2xl font-medium">
-          Stand out with our latest collection—bold designs, premium fabrics, and street-ready fits. Once they’re gone, they’re gone. Don’t miss out!
+          Stand out with our latest collection—bold designs, premium fabrics,
+          and street-ready fits. Once they’re gone, they’re gone. Don’t miss
+          out!
         </p>
       </div>
 
@@ -19,7 +25,7 @@ export default function FeaturedGrid() {
           {/* Left Large Card */}
           <div className="relative rounded-3xl overflow-hidden h-full  group">
             <img
-              src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80&w=1000"
+              src={feature1}
               alt="Sneakers"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -39,7 +45,7 @@ export default function FeaturedGrid() {
             {/* Top Right */}
             <div className="relative rounded-3xl overflow-hidden flex-1 group min-h-[250px] md:min-h-0">
               <img
-                src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1000"
+                src={feature2}
                 alt="Sneakers"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -57,7 +63,7 @@ export default function FeaturedGrid() {
             {/* Bottom Right */}
             <div className="relative rounded-3xl overflow-hidden flex-1 group min-h-[250px] md:min-h-0">
               <img
-                src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&q=80&w=1000"
+                src={feature3}
                 alt="Sneakers"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -77,7 +83,7 @@ export default function FeaturedGrid() {
         {/* Bottom Full Width Card */}
         <div className="relative rounded-3xl overflow-hidden h-[300px] md:h-[400px] group">
           <img
-            src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&q=80&w=2000"
+            src={feature4}
             alt="Trending Now"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
