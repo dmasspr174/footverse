@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps (Opsional, jika Anda punya sitemap.xml nanti)
+# Sitemap: https://footverse.vercel.app/sitemap.xml

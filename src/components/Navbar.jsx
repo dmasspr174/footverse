@@ -58,8 +58,8 @@ export default function Navbar() {
   return (
     <motion.nav
       initial={{ y: 0 }}
-      animate={{ y: isVisible ? 0 : "-100%" }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
+      animate={{ y: isVisible ? 0 : -100 }}
+      transition={{ duration: 0.2 }}
       className="fixed top-0 left-0 right-0 z-50 bg-surface-white/80 backdrop-blur-md text-text-main px-md py-sm shadow-sm border-b border-surface-muted font-sans"
     >
       <div className="flex flex-col md:flex-row items-center justify-between m-auto container mx-auto">

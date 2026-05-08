@@ -31,7 +31,7 @@ const Footer = () => {
                   <path d="M16 10a4 4 0 01-8 0" />
                 </svg>
               </div>
-              <span className="text-2xl font-bold tracking-tight">
+              <span className="text-2xl font-bold tracking-tight text-text-main">
                 Footverse
               </span>
             </div>
@@ -50,6 +50,8 @@ const Footer = () => {
                 <a
                   key={index}
                   href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.name}
                   className="w-10 h-10 flex items-center justify-center rounded-full bg-surface-white border border-surface-gray shadow-sm hover:bg-surface-gray/50 transition-colors"
                 >

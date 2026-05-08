@@ -15,19 +15,15 @@ function Product() {
       setIsLoading(true);
       const data = await getProducts(query + " shoes");
       setImages(data);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      setIsLoading(false);
     };
     fetchData();
   }, [query]);
 
   return (
-    <div className="section-container ">
+    <div className="section-container py-xl md:py-2xl">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold font-serif mb-xs text-text-main">
-          Our Collection
-        </h1>
+        <h1 className="text-3xl font-bold font-serif mb-xs text-text-main">Our Collection</h1>
         <p className="text-text-body">
           Discover the latest styles designed for comfort, performance, and
           everyday wear.
