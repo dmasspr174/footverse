@@ -7,8 +7,6 @@ import { motion } from "framer-motion";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
   SheetClose,
@@ -76,7 +74,10 @@ export default function Navbar() {
                 {SHEET_SIDES.map((side) => (
                   <Sheet key={side}>
                     <SheetTrigger asChild>
-                      <Button className="bg-surface-white text-text-main border-none" aria-label="Open Menu">
+                      <Button
+                        className="bg-surface-white text-text-main border-none"
+                        aria-label="Open Menu"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

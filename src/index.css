@@ -9,14 +9,14 @@
     /* --- BRAND TOKENS --- */
     --color-brand-primary: #2563eb;
     --color-brand-primary-hover: #1d4ed8;
-    --color-brand-accent: #3b82f6;
-    
+    --color-brand-accent: #222223;
+
     /* --- SURFACE TOKENS --- */
     --color-surface-white: #ffffff;
     --color-surface-gray: #f3f4f6;
     --color-surface-dark: #000000;
     --color-surface-muted: #e5e7eb;
-    
+
     /* --- TEXT TOKENS --- */
     --color-text-main: #111111;
     --color-text-body: #1f2937;
@@ -28,19 +28,19 @@
     --font-family-serif: serif;
 
     /* --- SPACING TOKENS --- */
-    --spacing-xs: 0.25rem;    /* 4px */
-    --spacing-sm: 0.5rem;     /* 8px */
-    --spacing-md: 1rem;       /* 16px */
-    --spacing-lg: 1.5rem;     /* 24px */
-    --spacing-xl: 2rem;       /* 32px */
-    --spacing-2xl: 3rem;      /* 48px */
-    --spacing-3xl: 4rem;      /* 64px */
-    --spacing-section: 5rem;  /* 80px */
+    --spacing-xs: 0.25rem; /* 4px */
+    --spacing-sm: 0.5rem; /* 8px */
+    --spacing-md: 1rem; /* 16px */
+    --spacing-lg: 1.5rem; /* 24px */
+    --spacing-xl: 2rem; /* 32px */
+    --spacing-2xl: 3rem; /* 48px */
+    --spacing-3xl: 4rem; /* 64px */
+    --spacing-section: 5rem; /* 80px */
 
     /* --- RADIUS TOKENS --- */
-    --radius-md: 0.75rem;     /* 12px */
-    --radius-lg: 1.5rem;      /* 24px */
-    --radius-xl: 2.5rem;      /* 40px */
+    --radius-md: 0.75rem; /* 12px */
+    --radius-lg: 1.5rem; /* 24px */
+    --radius-xl: 2.5rem; /* 40px */
     --radius-full: 9999px;
 
     /* --- SHADCN BASE (DO NOT CHANGE) --- */

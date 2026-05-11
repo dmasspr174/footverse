@@ -1,27 +1,60 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import feature1 from "../assets/17.jpg";
 import feature2 from "../assets/14.jpg";
 import feature3 from "../assets/11.jpg";
 import feature4 from "../assets/18.jpg";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function FeaturedGrid() {
   return (
-    <div className="max-w-[1400px] mx-auto font-sans">
-      <div className="text-start mb-xl">
+    <motion.div
+      className="max-w-[1400px] mx-auto font-sans"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+    >
+      <motion.div className="text-start mb-xl" variants={itemVariants}>
         <h2 className="heading-primary mb-sm">NEW DROPS</h2>
         <p className="text-gray-500 text-sm md:text-[15px] leading-relaxed max-w-2xl font-medium">
           Stand out with our latest collection—bold designs, premium fabrics,
           and street-ready fits. Once they’re gone, they’re gone. Don’t miss
           out!
         </p>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col gap-4">
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Left Large Card */}
-          <div className="relative rounded-card-lg overflow-hidden aspect-[4/5] md:aspect-auto h-full group">
+          <motion.div
+            className="relative rounded-card-lg overflow-hidden aspect-[4/5] md:aspect-auto h-full group"
+            variants={itemVariants}
+          >
             <img
               src={feature1}
               alt="Sneakers Collection"
@@ -38,12 +71,15 @@ export default function FeaturedGrid() {
               </h3>
               <button className="btn-white">View all sneakers</button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column */}
           <div className="flex flex-col gap-md">
             {/* Top Right */}
-            <div className="relative rounded-card-lg overflow-hidden flex-1 aspect-video md:aspect-auto group min-h-[250px] md:min-h-0">
+            <motion.div
+              className="relative rounded-card-lg overflow-hidden flex-1 aspect-video md:aspect-auto group min-h-[250px] md:min-h-0"
+              variants={itemVariants}
+            >
               <img
                 src={feature2}
                 alt="New Arrivals"
@@ -62,10 +98,13 @@ export default function FeaturedGrid() {
                   View all sneakers
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Bottom Right */}
-            <div className="relative rounded-card-lg overflow-hidden flex-1 aspect-video md:aspect-auto group min-h-[250px] md:min-h-0">
+            <motion.div
+              className="relative rounded-card-lg overflow-hidden flex-1 aspect-video md:aspect-auto group min-h-[250px] md:min-h-0"
+              variants={itemVariants}
+            >
               <img
                 src={feature3}
                 alt="Streetwear Essentials"
@@ -84,12 +123,15 @@ export default function FeaturedGrid() {
                   View all sneakers
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Bottom Full Width Card */}
-        <div className="relative rounded-card-lg overflow-hidden h-[300px] md:h-[400px] group">
+        <motion.div
+          className="relative rounded-card-lg overflow-hidden h-[300px] md:h-[400px] group"
+          variants={itemVariants}
+        >
           <img
             src={feature4}
             alt="Trending Styles"
@@ -109,8 +151,8 @@ export default function FeaturedGrid() {
               <ArrowUpRight size={16} strokeWidth={2.5} />
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

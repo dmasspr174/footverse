@@ -1,8 +1,32 @@
 import { useEffect, useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import { getProducts } from "../api";
 import { useLikes } from "../components/LikesContext";
 import { useCart } from "../components/CartContext";
 import { Skeleton } from "../components/ui/skeleton";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 function Product() {
   const [images, setImages] = useState([]);
@@ -10,6 +34,7 @@ function Product() {
   const { toggleLike, isLiked } = useLikes();
   const { toggleCart, isInCart } = useCart();
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -22,15 +47,27 @@ function Product() {
 
   return (
     <div className="section-container py-xl md:py-2xl">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold font-serif mb-xs text-text-main">Our Collection</h1>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="mb-6"
+      >
+        <h1 className="text-3xl font-bold font-serif mb-xs text-text-main">
+          Our Collection
+        </h1>
         <p className="text-text-body">
           Discover the latest styles designed for comfort, performance, and
           everyday wear.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="mb-8 flex flex-wrap items-center  gap-2 overflow-x-auto w-full">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="mb-8 flex flex-wrap items-center gap-2 overflow-x-auto w-full"
+      >
         {["Sports", "Women", "Men", "Kids"].map((item) => (
           <button
             key={item}
@@ -38,15 +75,21 @@ function Product() {
             className={`font-semibold py-sm px-10 border rounded transition-colors ${
               query === item
                 ? "bg-brand-accent text-text-contrast border-transparent"
-                : "bg-transparent hover:bg-brand-accent text-brand-primary hover:text-text-contrast border-brand-primary hover:border-transparent"
+                : "bg-transparent hover:bg-brand-accent text-text-main hover:text-text-contrast border-[0.5px] hover:border-transparent"
             }`}
           >
             {item}
           </button>
         ))}
-      </div>
+      </motion.div>
 
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <motion.div
+        key={query} // Re-animate when query changes
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+      >
         {isLoading
           ? Array.from({ length: 8 }).map((_, index) => (
               <div
@@ -69,8 +112,10 @@ function Product() {
           : images.map((img) => {
               const price = (img.id % 200) + 50;
               return (
-                <div
+                <motion.div
                   key={img.id}
+                  variants={itemVariants}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
                   className="flex flex-col border border-surface-gray rounded-card-md shadow-sm overflow-hidden bg-surface-white hover:shadow-md transition-shadow"
                 >
                   <div className="relative">
@@ -123,26 +168,23 @@ function Product() {
                         )
                         .join(", ")}
                     </p>
-                    <div className="mt-auto flex justify-between items-center">
-                      <span className="text-brand-primary font-bold text-xl">
+                    <div className="mt-auto flex items-center justify-between gap-4">
+                      <span className="text-2xl font-semibold text-gray-800">
                         ${price}
                       </span>
                       <button
                         onClick={() => toggleCart(img)}
-                        className={`${
-                          isInCart(img.id)
-                            ? "bg-surface-muted text-text-body hover:bg-surface-gray"
-                            : "btn-primary"
-                        } px-md py-sm`}
+                        className="btn-white border-[0.5px] px-4 py-2"
+                        aria-label={`Add ${img.tags} to shopping cart`}
                       >
                         {isInCart(img.id) ? "Remove" : "Add to Cart"}
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-      </div>
+      </motion.div>
     </div>
   );
 }

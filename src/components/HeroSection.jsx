@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion";
 import hero1 from "../assets/6.jpg";
 import hero2 from "../assets/9.jpg";
 import hero3 from "../assets/15.jpg";
@@ -72,29 +74,38 @@ export default function HeroCarousel() {
               index === currentIndex ? "scale-105" : "scale-100"
             }`}
           />
-          {/* Gradient Overlay agar teks lebih mudah dibaca */}
           <div className="absolute inset-0 bg-gradient-to-r from-surface-dark/60 via-surface-dark/30 to-transparent" />
         </div>
       ))}
 
       {/* Main Content (Teks & Tombol) */}
-      <div className="relative z-10 h-full flex flex-col justify-center px-10 md:px-20 lg:px-32 max-w-3xl">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-text-contrast leading-[1.1] tracking-tight mb-lg transition-all duration-700 transform translate-y-0">
-          {SLIDES[currentIndex].title}
-        </h1>
-        <p className="text-surface-gray text-sm md:text-base leading-relaxed mb-xl max-w-lg">
-          {SLIDES[currentIndex].description}
-        </p>
+      <div className="relative z-10 h-full flex flex-col justify-center px-10 md:px-20 lg:px-32 max-w-4xl">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h1 className="text-5xl md:text-8xl font-extrabold text-text-contrast leading-[1.1] tracking-tight mb-lg">
+              {SLIDES[currentIndex].title}
+            </h1>
+            <p className="text-surface-gray text-sm md:text-lg leading-relaxed mb-xl max-w-xl">
+              {SLIDES[currentIndex].description}
+            </p>
 
-        {/* Tombol CTA */}
-        <div>
-          <button className="flex items-center gap-sm bg-surface-white text-surface-dark px-lg py-3 rounded-full font-medium text-sm hover:bg-surface-gray transition-colors">
-            <span className="bg-surface-dark text-text-contrast p-xs rounded-full">
-              <ArrowRight size={16} strokeWidth={3} />
-            </span>
-            Shop now
-          </button>
-        </div>
+            {/* Tombol CTA */}
+            <div>
+              <button className="flex items-center gap-sm bg-surface-white text-surface-dark px-lg py-4 rounded-full font-bold text-sm hover:bg-surface-gray transition-all hover:scale-105 active:scale-95 shadow-lg">
+                <span className="bg-surface-dark text-text-contrast p-xs rounded-full">
+                  <ArrowRight size={18} strokeWidth={3} />
+                </span>
+                Shop now
+              </button>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Custom Bottom Pagination */}
@@ -106,7 +117,6 @@ export default function HeroCarousel() {
               onClick={() => setCurrentIndex(index)}
               className="relative flex-1 pt-6 cursor-pointer group"
             >
-              {/* Garis indikator aktif */}
               <div className="absolute top-[-1px] left-0 w-full h-[2px] bg-surface-white/20" />
               <div
                 className={`absolute top-[-1px] left-0 h-[2px] bg-surface-white origin-left transition-transform ${
@@ -116,9 +126,12 @@ export default function HeroCarousel() {
                 }`}
               />
 
-              {/* Teks Pagination */}
               <div
-                className={`transition-colors duration-300 ${index === currentIndex ? "text-text-contrast" : "text-text-muted group-hover:text-surface-gray"}`}
+                className={`transition-colors duration-300 ${
+                  index === currentIndex
+                    ? "text-text-contrast"
+                    : "text-text-muted group-hover:text-surface-gray"
+                }`}
               >
                 <span className="text-xs font-bold mb-1">{slide.id}</span>
                 <span className="text-xs hidden md:block font-medium truncate">

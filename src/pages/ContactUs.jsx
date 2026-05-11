@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import { Skeleton } from "../components/ui/skeleton";
 
 function AboutUs() {
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   return (
-    <div className=" px-md sm:px-lg lg:px-section flex items-center justify-center font-sans text-text-body">
+    <div className=" px-md sm:px-lg lg:px-section py-xl md:py-2xl flex items-center justify-center font-sans text-text-body">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 justify-between items-start">
         {/* Left Column (Text Content) */}
-        <div className="flex flex-col ">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col "
+        >
           <h1 className="text-3xl font-bold font-serif mb-xs text-text-main">
             Contact Us
           </h1>
@@ -59,10 +66,15 @@ function AboutUs() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Right Column (Form Card) */}
-        <div className="  md:p-10 ">
+        {/* Right Column (Map Card) */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="  md:p-10 "
+        >
           <div className="relative w-full h-[450px] rounded-card-lg shadow-xl shadow-brand-primary/5 overflow-hidden">
             {!isMapLoaded && (
               <Skeleton className="absolute inset-0 z-10 rounded-none" />
@@ -78,7 +90,7 @@ function AboutUs() {
               }`}
             ></iframe>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
