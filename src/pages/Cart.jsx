@@ -59,7 +59,10 @@ export default function Cart() {
           Looks like you haven't added anything to your cart yet. Discover your
           next favorite pair!
         </p>
-        <a href="/product" className="btn-primary rounded-full px-lg py-sm">
+        <a
+          href="/product"
+          className="btn-primary font-semibold rounded-full px-lg py-sm bg-brand-accent hover:bg-white hover:text-black  border-black border-[0.5px]"
+        >
           Explore Products
         </a>
       </motion.div>
@@ -106,26 +109,26 @@ export default function Cart() {
                     className="w-full h-64 object-cover"
                   />
                 </div>
-                  <div className="p-5 flex flex-col flex-grow">
-                    <p className="text-text-body text-sm mb-lg font-medium line-clamp-2">
-                      {img.tags
-                        .split(", ")
-                        .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
-                        .join(", ")}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between gap-4">
-                      <span className="text-2xl font-semibold text-gray-800">
-                        ${price}
-                      </span>
-                      <button
-                        onClick={() => toggleCart(img)}
-                        className="btn-white border-[0.5px] px-4 py-2"
-                        aria-label={`Remove ${img.tags} from shopping cart`}
-                      >
-                        Remove
-                      </button>
-                    </div>
+                <div className="p-5 flex flex-col flex-grow">
+                  <p className="text-text-body text-sm mb-lg font-medium line-clamp-2">
+                    {img.tags
+                      .split(", ")
+                      .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
+                      .join(", ")}
+                  </p>
+                  <div className="mt-auto flex items-center justify-between gap-4">
+                    <span className="text-2xl font-semibold text-gray-800">
+                      ${price}
+                    </span>
+                    <button
+                      onClick={() => toggleCart(img)}
+                      className="btn-white border-[0.5px] px-4 py-2"
+                      aria-label={`Remove ${img.tags} from shopping cart`}
+                    >
+                      Remove
+                    </button>
                   </div>
+                </div>
               </motion.div>
             );
           })}
@@ -181,7 +184,7 @@ export default function Cart() {
           >
             Total: ${totalPrice}
           </motion.span>
-          <button className="btn-primary rounded-full px-xl py-lg">
+          <button className="btn-primary font-semibold rounded-full px-lg py-sm bg-brand-accent hover:bg-white hover:text-black  border-black border-[0.5px]">
             Checkout
           </button>
         </div>

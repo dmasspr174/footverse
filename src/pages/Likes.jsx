@@ -57,7 +57,10 @@ export default function Likes() {
           You haven't added any products to your likes collection yet. Start
           exploring and save your favorites!
         </p>
-        <a href="/product" className="btn-primary rounded-full px-lg py-sm">
+        <a
+          href="/product"
+          className="btn-primary font-semibold rounded-full px-lg py-sm bg-brand-accent hover:bg-white hover:text-black  border-black border-[0.5px]"
+        >
           Explore Products
         </a>
       </motion.div>
@@ -134,26 +137,26 @@ export default function Likes() {
                     )}
                   </button>
                 </div>
-                  <div className="p-5 flex flex-col flex-grow">
-                    <p className="text-text-body text-sm mb-lg font-medium line-clamp-2">
-                      {img.tags
-                        .split(", ")
-                        .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
-                        .join(", ")}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between gap-4">
-                      <span className="text-2xl font-semibold text-gray-800">
-                        ${price}
-                      </span>
-                      <button
-                        onClick={() => toggleCart(img)}
-                        className="btn-white border-[0.5px] px-4 py-2"
-                        aria-label={`Add ${img.tags} to shopping cart`}
-                      >
-                        {isInCart(img.id) ? "Remove" : "Add to Cart"}
-                      </button>
-                    </div>
+                <div className="p-5 flex flex-col flex-grow">
+                  <p className="text-text-body text-sm mb-lg font-medium line-clamp-2">
+                    {img.tags
+                      .split(", ")
+                      .map((tag) => tag.charAt(0).toUpperCase() + tag.slice(1))
+                      .join(", ")}
+                  </p>
+                  <div className="mt-auto flex items-center justify-between gap-4">
+                    <span className="text-2xl font-semibold text-gray-800">
+                      ${price}
+                    </span>
+                    <button
+                      onClick={() => toggleCart(img)}
+                      className="btn-white border-[0.5px] px-4 py-2"
+                      aria-label={`Add ${img.tags} to shopping cart`}
+                    >
+                      {isInCart(img.id) ? "Remove" : "Add to Cart"}
+                    </button>
                   </div>
+                </div>
               </motion.div>
             );
           })}

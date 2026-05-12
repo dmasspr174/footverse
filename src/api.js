@@ -8,13 +8,6 @@ export const getProducts = async (query = "shoes") => {
     if (!API_KEY || !BASE_URL) {
       throw new Error("ENV tidak terbaca");
     }
-
-    console.log(
-      "FETCH URL:",
-      `${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo`,
-    );
-    console.log("QUERY YANG DIKIRIM:", query);
-
     const response = await axios.get(BASE_URL, {
       params: {
         key: API_KEY,
@@ -23,7 +16,7 @@ export const getProducts = async (query = "shoes") => {
         order: "popular",
       },
     });
-    console.log(response);
+
     return response.data.hits;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -36,12 +29,6 @@ export const getImages = async (query = "shoes", limit = 4) => {
     if (!API_KEY || !BASE_URL) {
       throw new Error("ENV tidak terbaca");
     }
-
-    console.log(
-      "FETCH URL:",
-      `${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo&per_page=${limit}`,
-    );
-    console.log("QUERY YANG DIKIRIM:", query);
 
     const response = await axios.get(BASE_URL, {
       params: {

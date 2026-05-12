@@ -7,8 +7,8 @@ function AboutUs() {
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   return (
-    <div className=" px-md sm:px-lg lg:px-section py-xl md:py-2xl flex items-center justify-center font-sans text-text-body">
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 justify-between items-start">
+    <div className=" section-container py-xl md:py-0 flex items-center justify-center font-sans text-text-body">
+      <div className=" w-full grid grid-cols-1 lg:grid-cols-2 gap-16 justify-between items-start">
         {/* Left Column (Text Content) */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
