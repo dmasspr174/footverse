@@ -68,7 +68,7 @@ export default function Likes() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div className="section-container py-xl md:py-0">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -150,7 +150,11 @@ export default function Likes() {
                     </span>
                     <button
                       onClick={() => toggleCart(img)}
-                      className="btn-white border-[0.5px] px-4 py-2"
+                      className={`font-semibold py-sm rounded-xl  px-4 transition-colors ${
+                        isInCart(img.id)
+                          ? "bg-brand-accent text-text-contrast border-transparent"
+                          : "bg-transparent hover:bg-brand-accent text-text-main hover:text-text-contrast border-[0.5px] hover:border-transparent"
+                      }`}
                       aria-label={`Add ${img.tags} to shopping cart`}
                     >
                       {isInCart(img.id) ? "Remove" : "Add to Cart"}

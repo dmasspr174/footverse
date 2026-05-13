@@ -70,7 +70,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div className="section-container py-xl md:py-0">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ export default function Cart() {
                     </span>
                     <button
                       onClick={() => toggleCart(img)}
-                      className="btn-white border-[0.5px] px-4 py-2"
+                      className="bg-brand-accent text-text-contrast border-transparent font-semibold py-sm rounded-xl  px-4 transition-colors"
                       aria-label={`Remove ${img.tags} from shopping cart`}
                     >
                       Remove

@@ -52,7 +52,7 @@ function Search() {
   }, [query]);
 
   return (
-    <div className="section-container py-xl md:py-2xl">
+    <div className="section-container py-xl md:py-0">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -116,7 +116,11 @@ function Search() {
                       </span>
                       <button
                         onClick={() => toggleCart(product)}
-                        className="btn-white border-[0.5px] px-4 py-2"
+                        className={`font-semibold py-sm rounded-xl  px-4 transition-colors ${
+                          isInCart(product.id)
+                            ? "bg-brand-accent text-text-contrast border-transparent"
+                            : "bg-transparent hover:bg-brand-accent text-text-main hover:text-text-contrast border-[0.5px] hover:border-transparent"
+                        }`}
                         aria-label={`Add ${product.tags} to shopping cart`}
                       >
                         {isInCart(product.id) ? "Remove" : "Add to Cart"}
