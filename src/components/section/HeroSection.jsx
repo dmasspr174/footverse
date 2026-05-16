@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import hero1 from "../assets/6.jpg";
-import hero2 from "../assets/9.jpg";
-import hero3 from "../assets/15.jpg";
-import hero4 from "../assets/7.jpg";
+import hero1 from "../../assets/6.jpg";
+import hero2 from "../../assets/9.jpg";
+import hero3 from "../../assets/15.jpg";
+import hero4 from "../../assets/7.jpg";
 
 const SLIDES = [
   {
@@ -97,8 +97,8 @@ export default function HeroCarousel() {
 
             {/* Tombol CTA */}
             <div>
-              <button className="flex items-center gap-sm bg-surface-white text-surface-dark px-lg py-4 rounded-full font-bold text-sm hover:bg-surface-gray transition-all hover:scale-105 active:scale-95 shadow-lg">
-                <span className="bg-surface-dark text-text-contrast p-xs rounded-full">
+              <button className="flex items-center gap-sm bg-surface-white text-surface-dark px-lg py-4 rounded-full font-bold text-sm hover:bg-brand-accent hover:text-text-contrast transition-all hover:scale-105 active:scale-95 shadow-lg">
+                <span className="bg-surface-dark text-text-contrast p-xs rounded-full ">
                   <ArrowRight size={18} strokeWidth={3} />
                 </span>
                 Shop now

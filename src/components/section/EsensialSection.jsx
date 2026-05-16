@@ -1,9 +1,9 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import esensial1 from "../assets/3.jpg";
-import esensial2 from "../assets/4.jpg";
-import esensial3 from "../assets/1.jpg";
+import esensial1 from "../../assets/3.jpg";
+import esensial2 from "../../assets/4.jpg";
+import esensial3 from "../../assets/1.jpg";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -80,7 +80,7 @@ function EsensialSection() {
                 {item.title}
               </h3>
               <button
-                className="btn-white"
+                className="btn-white hover:bg-brand-accent hover:text-text-contrast"
                 aria-label={`View all ${item.title}`}
               >
                 View all

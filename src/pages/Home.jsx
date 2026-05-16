@@ -1,8 +1,8 @@
-import HeroCarousel from "@/components/HeroSection";
-import FeaturedGrid from "@/components/FeatureSection";
-import EsensialSection from "@/components/EsensialSection";
-import TrustBadges from "@/components/TrustBadges";
-import BestsellerSection from "@/components/BestsellerSection";
+import HeroCarousel from "@/components/section/HeroSection";
+import FeaturedGrid from "@/components/section/FeatureSection";
+import EsensialSection from "@/components/section/EsensialSection";
+import TrustBadges from "@/components/section/TrustBadgesSection";
+import BestsellerSection from "@/components/section/BestsellerSection";
 function Home() {
   return (
     <div className="bg-surface-white font-sans overflow-x-hidden">

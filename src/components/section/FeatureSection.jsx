@@ -2,10 +2,10 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import feature1 from "../assets/17.jpg";
-import feature2 from "../assets/14.jpg";
-import feature3 from "../assets/11.jpg";
-import feature4 from "../assets/18.jpg";
+import feature1 from "../../assets/17.jpg";
+import feature2 from "../../assets/14.jpg";
+import feature3 from "../../assets/11.jpg";
+import feature4 from "../../assets/18.jpg";
 
 const containerVariants = {
   hidden: { opacity: 0 },
