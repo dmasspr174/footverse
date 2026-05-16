@@ -46,27 +46,23 @@ Footverse is a Single Page Application (SPA) designed to simulate a modern e-com
 ---
 
 ## 📸 Preview
-home page
-<img width="277" height="943" alt="image" src="https://github.com/user-attachments/assets/cf269826-5e7a-4c43-9ba0-ba999ff1eff8" />
 
-product page
-<img width="298" height="685" alt="image" src="https://github.com/user-attachments/assets/f35768d4-6182-4f53-8b8d-8bd61214347a" />
+### 📱 Mobile Experience
+| Home Page | Product Page | Search Page |
+| :---: | :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/cf269826-5e7a-4c43-9ba0-ba999ff1eff8" width="250" /> | <img src="https://github.com/user-attachments/assets/f35768d4-6182-4f53-8b8d-8bd61214347a" width="250" /> | <img src="https://github.com/user-attachments/assets/21a266ec-0f9e-4ce2-ac66-52be82c45f70" width="250" /> |
 
-likes page
-<img width="1366" height="1613" alt="screencapture-footverse-vercel-app-likes-2026-05-13-16_40_26" src="https://github.com/user-attachments/assets/37da193e-e775-403c-8617-3adc5da4c90d" />
+| Contact Us |
+| :---: |
+| <img src="https://github.com/user-attachments/assets/f044f3b8-dae7-49b5-9de0-9dc3f431bce8" width="250" /> |
 
-cart page
-<img width="1366" height="2106" alt="screencapture-footverse-vercel-app-cart-2026-05-13-16_30_48" src="https://github.com/user-attachments/assets/98422677-26d9-4f3d-b52d-7759df645c02" />
+### 💻 Desktop Experience
 
-contact us page
-<img width="285" height="254" alt="image" src="https://github.com/user-attachments/assets/f044f3b8-dae7-49b5-9de0-9dc3f431bce8" />
+#### Likes Page
+![Likes Page](https://github.com/user-attachments/assets/37da193e-e775-403c-8617-3adc5da4c90d)
 
-search page
-<img width="285" height="600" alt="image" src="https://github.com/user-attachments/assets/21a266ec-0f9e-4ce2-ac66-52be82c45f70" />
-
-
-
-
+#### Cart Page
+![Cart Page](https://github.com/user-attachments/assets/98422677-26d9-4f3d-b52d-7759df645c02)
 ---
 
 ## 🔄 Application Flow
