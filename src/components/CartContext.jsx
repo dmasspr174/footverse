@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext, useMemo, useCallback } from "react";
 
 const CartContext = createContext();
 
@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
   }, [cartProducts]);
 
-  const toggleCart = (product) => {
+  const toggleCart = useCallback((product) => {
     setCartProducts((prev) => {
       const isExist = prev.find((item) => item.id === product.id);
       if (isExist) {
@@ -24,14 +24,20 @@ export const CartProvider = ({ children }) => {
         return [...prev, product];
       }
     });
-  };
+  }, []);
 
-  const isInCart = (productId) => {
+  const isInCart = useCallback((productId) => {
     return cartProducts.some((item) => item.id === productId);
-  };
+  }, [cartProducts]);
+
+  const value = useMemo(() => ({
+    cartProducts,
+    toggleCart,
+    isInCart
+  }), [cartProducts, toggleCart, isInCart]);
 
   return (
-    <CartContext.Provider value={{ cartProducts, toggleCart, isInCart }}>
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

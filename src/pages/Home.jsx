@@ -1,8 +1,10 @@
+import React, { lazy, Suspense } from "react";
 import HeroCarousel from "@/components/section/HeroSection";
-import FeaturedGrid from "@/components/section/FeatureSection";
-import EsensialSection from "@/components/section/EsensialSection";
-import TrustBadges from "@/components/section/TrustBadgesSection";
-import BestsellerSection from "@/components/section/BestsellerSection";
+const FeaturedGrid = lazy(() => import("@/components/section/FeatureSection"));
+const EsensialSection = lazy(() => import("@/components/section/EsensialSection"));
+const TrustBadges = lazy(() => import("@/components/section/TrustBadgesSection"));
+const BestsellerSection = lazy(() => import("@/components/section/BestsellerSection"));
+
 function Home() {
   return (
     <div className="bg-surface-white font-sans overflow-x-hidden">
@@ -11,19 +13,21 @@ function Home() {
         <HeroCarousel />
       </div>
 
-      {/* Esenesial Section */}
-      <EsensialSection />
+      <Suspense fallback={<div className="h-40 flex items-center justify-center text-text-muted">Loading content...</div>}>
+        {/* Esenesial Section */}
+        <EsensialSection />
 
-      {/* Best Sellers Section */}
-      <BestsellerSection />
+        {/* Best Sellers Section */}
+        <BestsellerSection />
 
-      {/* Featured Grid Section */}
-      <div className="container mx-auto px-4 py-8">
-        <FeaturedGrid />
-      </div>
+        {/* Featured Grid Section */}
+        <div className="container mx-auto px-4 py-8">
+          <FeaturedGrid />
+        </div>
 
-      {/* Trust Badges */}
-      <TrustBadges />
+        {/* Trust Badges */}
+        <TrustBadges />
+      </Suspense>
     </div>
   );
 }
