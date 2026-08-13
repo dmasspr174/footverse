@@ -1,4 +1,5 @@
-import { useCart } from "../components/CartContext";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../redux/reducer/cartReducer";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -25,7 +26,12 @@ const itemVariants = {
 };
 
 export default function Cart() {
-  const { cartProducts, toggleCart } = useCart();
+  const cartProducts = useSelector(state => state.cart.items);
+  const dispatch = useDispatch();
+
+  const toggleCart = (product) => {
+    dispatch(removeFromCart(product.id));
+  };
 
   const totalPrice = cartProducts.reduce((acc, img) => {
     return acc + ((img.id % 200) + 50);

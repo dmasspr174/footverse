@@ -8,8 +8,9 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { getImages } from "../../api";
-import { useCart } from "../../components/CartContext";
+import { fetchImages } from "../../redux/action/productAction";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/reducer/cartReducer";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const containerVariants = {
@@ -35,14 +36,25 @@ const itemVariants = {
 };
 
 function BestsellerSection() {
-  const { toggleCart, isInCart } = useCart();
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  
+  const isInCart = (id) => cartItems.some((item) => item.id === id);
+  
+  const toggleCart = (product) => {
+    if (isInCart(product.id)) {
+      dispatch(removeFromCart(product.id));
+    } else {
+      dispatch(addToCart(product));
+    }
+  };
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const data = await getImages("shoes", 12);
+      const data = await dispatch(fetchImages({ query: "shoes", limit: 12 })).unwrap();
       setProducts(data);
       setIsLoading(false);
     };

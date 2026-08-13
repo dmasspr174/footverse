@@ -1,5 +1,6 @@
-import { useLikes } from "../components/LikesContext";
-import { useCart } from "../components/CartContext";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleLike } from "../redux/reducer/likeReducer";
+import { addToCart, removeFromCart } from "../redux/reducer/cartReducer";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -26,8 +27,24 @@ const itemVariants = {
 };
 
 export default function Likes() {
-  const { likedProducts, toggleLike, isLiked } = useLikes();
-  const { toggleCart, isInCart } = useCart();
+  const likedProducts = useSelector(state => state.like.likes);
+  const cartItems = useSelector(state => state.cart.items);
+  const dispatch = useDispatch();
+
+  const isLiked = (id) => likedProducts.some((item) => item.id === id);
+  const isInCart = (id) => cartItems.some((item) => item.id === id);
+
+  const handleToggleLike = (product) => {
+    dispatch(toggleLike(product));
+  };
+
+  const handleToggleCart = (product) => {
+    if (isInCart(product.id)) {
+      dispatch(removeFromCart(product.id));
+    } else {
+      dispatch(addToCart(product));
+    }
+  };
 
   if (likedProducts.length === 0) {
     return (
@@ -107,7 +124,7 @@ export default function Likes() {
                     className="w-full h-64 object-cover"
                   />
                   <button
-                    onClick={() => toggleLike(img)}
+                    onClick={() => handleToggleLike(img)}
                     className="absolute top-sm right-sm p-sm bg-surface-white/90 hover:bg-surface-white rounded-full shadow-sm transition-colors text-destructive z-10 cursor-pointer"
                   >
                     {isLiked(img.id) ? (
@@ -149,7 +166,7 @@ export default function Likes() {
                       ${price}
                     </span>
                     <button
-                      onClick={() => toggleCart(img)}
+                      onClick={() => handleToggleCart(img)}
                       className={`font-semibold py-sm rounded-xl  px-4 transition-colors ${
                         isInCart(img.id)
                           ? "bg-brand-accent text-text-contrast border-transparent"

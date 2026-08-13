@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { getProductsByQuery } from "../api";
-import { useCart } from "../components/CartContext";
+import { fetchProductsByQuery } from "../redux/action/productAction";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../redux/reducer/cartReducer";
 import { Skeleton } from "../components/ui/skeleton";
 
 const containerVariants = {
@@ -29,7 +30,18 @@ const itemVariants = {
 };
 
 function Search() {
-  const { toggleCart, isInCart } = useCart();
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  
+  const isInCart = (id) => cartItems.some((item) => item.id === id);
+  
+  const toggleCart = (product) => {
+    if (isInCart(product.id)) {
+      dispatch(removeFromCart(product.id));
+    } else {
+      dispatch(addToCart(product));
+    }
+  };
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
@@ -39,7 +51,7 @@ function Search() {
     const fetchData = async () => {
       if (query) {
         setIsLoading(true);
-        const data = await getProductsByQuery(query);
+        const data = await dispatch(fetchProductsByQuery(query)).unwrap();
         setProducts(data);
         setTimeout(() => {
           setIsLoading(false);

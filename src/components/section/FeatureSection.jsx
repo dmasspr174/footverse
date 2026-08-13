@@ -2,10 +2,7 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import feature1 from "../../assets/17.jpg";
-import feature2 from "../../assets/14.jpg";
-import feature3 from "../../assets/11.jpg";
-import feature4 from "../../assets/18.jpg";
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -56,7 +53,7 @@ export default function FeaturedGrid() {
             variants={itemVariants}
           >
             <img
-              src={feature1}
+              src="/assets/17.webp"
               alt="Sneakers Collection"
               loading="lazy"
               decoding="async"
@@ -81,7 +78,7 @@ export default function FeaturedGrid() {
               variants={itemVariants}
             >
               <img
-                src={feature2}
+                src="/assets/14.webp"
                 alt="New Arrivals"
                 loading="lazy"
                 decoding="async"
@@ -106,7 +103,7 @@ export default function FeaturedGrid() {
               variants={itemVariants}
             >
               <img
-                src={feature3}
+                src="/assets/11.webp"
                 alt="Streetwear Essentials"
                 loading="lazy"
                 decoding="async"
@@ -133,7 +130,7 @@ export default function FeaturedGrid() {
           variants={itemVariants}
         >
           <img
-            src={feature4}
+            src="/assets/18.webp"
             alt="Trending Styles"
             loading="lazy"
             decoding="async"

@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useLikes } from "./LikesContext";
-import { useCart } from "./CartContext";
+import { useSelector } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import {
@@ -16,8 +15,8 @@ import { Button } from "@/components/ui/button";
 export default function Navbar() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const { likedProducts } = useLikes();
-  const { cartProducts } = useCart();
+  const likedProducts = useSelector(state => state.like.likes);
+  const cartProducts = useSelector(state => state.cart.items);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 

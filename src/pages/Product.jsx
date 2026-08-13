@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { getProducts } from "../api";
-import { useLikes } from "../components/LikesContext";
-import { useCart } from "../components/CartContext";
+import { fetchProducts } from "../redux/action/productAction";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleLike } from "../redux/reducer/likeReducer";
+import { addToCart, removeFromCart } from "../redux/reducer/cartReducer";
 import { Skeleton } from "../components/ui/skeleton";
 
 const containerVariants = {
@@ -31,19 +32,34 @@ const itemVariants = {
 function Product() {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState("");
-  const { toggleLike, isLiked } = useLikes();
-  const { toggleCart, isInCart } = useCart();
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  const likeItems = useSelector((state) => state.like.likes);
+  const isLiked = (id) => likeItems.some((item) => item.id === id);
+  const isInCart = (id) => cartItems.some((item) => item.id === id);
+
+  const handleToggleLike = (product) => {
+    dispatch(toggleLike(product));
+  };
+
+  const handleToggleCart = (product) => {
+    if (isInCart(product.id)) {
+      dispatch(removeFromCart(product.id));
+    } else {
+      dispatch(addToCart(product));
+    }
+  };
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const data = await getProducts(query + " shoes");
+      const data = await dispatch(fetchProducts(query + " shoes")).unwrap();
       setImages(data);
       setIsLoading(false);
     };
     fetchData();
-  }, [query]);
+  }, [query, dispatch]);
 
   return (
     <div className="section-container py-xl md:py-0">
@@ -88,7 +104,7 @@ function Product() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+        className="grid gap-4 sm:gap-6 grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
       >
         {isLoading
           ? Array.from({ length: 8 }).map((_, index) => (
@@ -109,7 +125,7 @@ function Product() {
                 </div>
               </div>
             ))
-          : images.map((img) => {
+          : images.map((img, index) => {
               const price = (img.id % 200) + 50;
               return (
                 <motion.div
@@ -123,13 +139,13 @@ function Product() {
                       <img
                         src={img.webformatURL}
                         alt={img.tags}
-                        loading="lazy"
+                        loading={index < 4 ? "eager" : "lazy"}
                         decoding="async"
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <button
-                      onClick={() => toggleLike(img)}
+                      onClick={() => handleToggleLike(img)}
                       className="absolute top-sm right-sm p-sm bg-surface-white/90 hover:bg-surface-white rounded-full shadow-sm transition-colors text-destructive z-10 cursor-pointer"
                     >
                       {isLiked(img.id) ? (
@@ -169,12 +185,12 @@ function Product() {
                         .join(", ")}
                     </p>
                     <div className="mt-auto flex items-center justify-between gap-4">
-                      <span className="text-2xl font-semibold text-gray-800">
+                      <span className="text-md font-semibold text-gray-800">
                         ${price}
                       </span>
                       <button
-                        onClick={() => toggleCart(img)}
-                        className={`font-semibold py-sm rounded-xl  px-4 transition-colors ${
+                        onClick={() => handleToggleCart(img)}
+                        className={`font-semibold py-sm rounded-xl text-sm px-4 transition-colors ${
                           isInCart(img.id)
                             ? "bg-brand-accent text-text-contrast border-transparent"
                             : "bg-transparent hover:bg-brand-accent text-text-main hover:text-text-contrast border-[0.5px] hover:border-transparent"

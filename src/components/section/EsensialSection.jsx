@@ -1,9 +1,7 @@
 import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import esensial1 from "../../assets/3.jpg";
-import esensial2 from "../../assets/4.jpg";
-import esensial3 from "../../assets/1.jpg";
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -45,17 +43,17 @@ function EsensialSection() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-lg md:gap-12 w-full min-h-[400px]">
         {[
           {
-            img: esensial1,
+            img: "/assets/3.webp",
             title: "Sneakers",
             alt: "Classic Urban Sneakers Collection",
           },
           {
-            img: esensial2,
+            img: "/assets/4.webp",
             title: "Sneakers",
             alt: "Performance Streetwear Shoes",
           },
           {
-            img: esensial3,
+            img: "/assets/1.webp",
             title: "Sneakers",
             alt: "Limited Edition Urban Footwear",
           },

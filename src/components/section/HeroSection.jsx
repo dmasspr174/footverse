@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import hero1 from "../../assets/6.jpg";
-import hero2 from "../../assets/9.jpg";
-import hero3 from "../../assets/15.jpg";
-import hero4 from "../../assets/7.jpg";
 
 const SLIDES = [
   {
@@ -14,7 +10,7 @@ const SLIDES = [
     title: "STREET CULTURE",
     description:
       "Embracing the raw energy of the streets through innovative designs and unapologetic aesthetics.",
-    image: hero1,
+    image: "/assets/2.webp",
   },
   {
     id: "02",
@@ -22,7 +18,7 @@ const SLIDES = [
     title: "FUTURE-READY FASHION",
     description:
       "From oversized silhouettes to innovative materials, we push the boundaries of modern streetwear while staying true to the culture.",
-    image: hero2,
+    image: "/assets/9.webp",
   },
   {
     id: "03",
@@ -30,7 +26,7 @@ const SLIDES = [
     title: "ART MEETS ATTITUDE",
     description:
       "Express yourself with wearable art pieces designed for those who dare to stand out.",
-    image: hero3,
+    image: "/assets/15.webp",
   },
   {
     id: "04",
@@ -38,7 +34,7 @@ const SLIDES = [
     title: "URBAN ESSENTIALS",
     description:
       "Durable, comfortable, and styled for the daily grind of city life.",
-    image: hero4,
+    image: "/assets/7.webp",
   },
 ];
 
