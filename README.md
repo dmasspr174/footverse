@@ -9,8 +9,8 @@ https://footverse.vercel.app/
 
 ---
 
-## 👨‍💻 My Role
-Frontend Developer
+## 👨‍💻 PageSpeed
+[Frontend Developer](https://pagespeed.web.dev/analysis/https-footverse-vercel-app/12r7n5q4kh?form_factor=mobile)
 
 ---
 
@@ -33,7 +33,8 @@ Footverse is a Single Page Application (SPA) designed to simulate a modern e-com
 - Tailwind CSS  
 - REST API (Pixabay)  
 - JavaScript (ES6+)  
-- Vercel (Deployment)  
+- Vercel (Deployment)
+- Redux (State Management Global) 
 
 ---
 
